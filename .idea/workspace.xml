@@ -2,42 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64cac9b6-a935-4a01-9a3f-0b0702f74eae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/images/bg_dots.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ximages/bg_dots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/bg_grid.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ximages/bg_grid.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/dottedRec.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ximages/dottedRec.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/slider-background.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ximages/slider-background.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php-inspections-ea-ultimate.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ximages/bg_dots.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/bg_dots.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ximages/bg_grid.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/bg_grid.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ximages/dottedRec.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/dottedRec.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ximages/slider-background.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/slider-background.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/whiteboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/whiteboard.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-              <folding>
-                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <execution />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -70,6 +51,7 @@
     <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
+  <component name="ProjectId" id="20HSD9gXWEQXzUlLK4RmoW89GPG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
@@ -116,28 +98,24 @@
       <pane id="ProjectPane" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\laragon\www\JS_HTML\whiteboard" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -153,6 +131,7 @@
       <workItem from="1634811318259" duration="1555000" />
       <workItem from="1634899492202" duration="4191000" />
       <workItem from="1635243335312" duration="1486000" />
+      <workItem from="1635699950353" duration="21035000" />
     </task>
     <servers />
   </component>
@@ -186,7 +165,7 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/config.default.yml">

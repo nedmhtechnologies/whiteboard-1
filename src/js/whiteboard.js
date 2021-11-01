@@ -76,11 +76,11 @@ const whiteboard = {
         );
         // whiteboard canvas
         _this.canvasElement = $(
-            '<canvas id="whiteboardCanvas" style="position: absolute; left:0px; top:0; cursor:crosshair;"></canvas>'
+            '<canvas id="whiteboardCanvas" style="position: absolute; left:0px; top:0; cursor:crosshair;" width="100%" height="100%"></canvas>'
         );
         // SVG container holding drawing or moving previews
         _this.svgContainer = $(
-            '<svg style="position: absolute; top:0px; left:0px;" width="100%" height="100%"></svg>'
+            '<svg style="position: absolute; top:0px; left:0px;" ></svg>'
         );
         // drag and drop indicator, hidden by default
         _this.dropIndicator = $(
@@ -113,19 +113,36 @@ const whiteboard = {
         dom.i2svg();
 
         this.canvas = $("#whiteboardCanvas")[0];
-        this.canvas.height = $(window).height();
-        this.canvas.width = $(window).width();
+
+        /*this.canvas.height = innerHeight;
+        this.canvas.width = innerWidth;*/
+
         this.ctx = this.canvas.getContext("2d");
+
+        this.ctx.canvas.width  = window.innerWidth;
+        this.ctx.canvas.height = window.innerHeight;
+
         this.oldGCO = this.ctx.globalCompositeOperation;
+
+
+
 
         window.addEventListener("resize", function () {
             // Handle resize
             const dbCp = JSON.parse(JSON.stringify(_this.drawBuffer)); // Copy the buffer
-            _this.canvas.width = $(window).width();
+           /* _this.canvas.width = $(window).width();
             _this.canvas.height = $(window).height(); // Set new canvas height
             _this.drawBuffer = [];
             _this.textContainer.empty();
-            _this.loadData(dbCp); // draw old content in
+            _this.loadData(dbCp); // draw old content in*/
+
+            $("#whiteboardCanvas").outerHeight($(window).height()-$("#whiteboardCanvas").offset().top- Math.abs($("#whiteboardCanvas").outerHeight(true) - $("#whiteboardCanvas").outerHeight()));
+            $(window).on("resize", function(){
+                console.log("using this ");
+                $("#whiteboardCanvas").outerHeight($(window).height()-$("#whiteboardCanvas").offset().top- Math.abs($("#whiteboardCanvas").outerHeight(true) - $("#whiteboardCanvas").outerHeight()));
+            });
+
+
         });
 
         $(_this.mouseOverlay).on("mousedown touchstart", function (e) {
