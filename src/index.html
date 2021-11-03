@@ -1,27 +1,51 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Clipboard Nation | Whiteboard</title>
+        <title>Whiteboard</title>
         <meta charset="utf-8" />
         <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     </head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <body style="display: none;">
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            font-size: 30px;
+            text-align: center;
+        }
 
-    <div class="col-lg-12" >
+        .flex-item-left {
+            background-color: #f1f1f1;
+            padding: 10px;
+            flex: 50%;
+        }
 
+        .flex-item-right {
+            background-color: dodgerblue;
+            padding: 10px;
+            flex: 50%;
+        }
+
+        /* Responsive layout - makes a one column-layout instead of two-column layout */
+        @media (max-width: 800px) {
+            .flex-container {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+    <body style="display: none">
         <!---Whiteboard container -!-->
         <div id="whiteboardContainer"></div>
 
+
         <!---Toolbar -!-->
         <div id="toolbar" style="position: absolute; top: 10px; left: 10px">
-            <div class="btn-group">
+<!--            <div class="flex-container">-->
+            <div class="btn-group ">
                 <button
                     id="whiteboardLockBtn"
                     style="background-color: orange"
@@ -35,9 +59,10 @@
                 </button>
             </div>
 
-            <div class="btn-group whiteboard-edit-group">
+
+            <div class="btn-group whiteboard-edit-group ">
                 <button id="whiteboardTrashBtn" title="Clear the whiteboard" type="button">
-                    <i class="fa fa-trash"></i>
+                    <i class="fa fa-trash "></i>
                 </button>
                 <button
                     style="display: none"
@@ -55,7 +80,7 @@
                 </button>
             </div>
 
-            <div class="btn-group whiteboard-edit-group">
+            <div class="btn-group whiteboard-edit-group ">
                 <button tool="mouse" title="Take the mouse" type="button" class="whiteboard-tool">
                     <i class="fa fa-mouse-pointer"></i>
                 </button>
@@ -69,13 +94,16 @@
                     <img src="./images/dottedRec.png" />
                 </button>
                 <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-01.png); background-position: center; background-repeat: no-repeat;"
                     tool="pen"
                     title="Take the pen"
                     type="button"
                     class="whiteboard-tool active"
                 >
-                    <i class="fa fa-pencil-alt"></i>
-                </button>
+                  <img class="" src="" />
+
+                </button
+                    style="bac">
                 <button
                     style="padding-bottom: 8px; padding-top: 6px"
                     tool="line"
@@ -96,7 +124,7 @@
                 </button>
             </div>
 
-            <div class="btn-group whiteboard-edit-group">
+            <div class="btn-group whiteboard-edit-group ">
                 <button style="width: 190px; cursor: default">
                     <div
                         class="activeToolIcon"
@@ -139,7 +167,7 @@
                 </button>
             </div>
 
-            <div class="btn-group whiteboard-edit-group">
+            <div class="btn-group whiteboard-edit-group ">
                 <button tool="text" title="write text" type="button" class="whiteboard-tool">
                     <i class="fas fa-font"></i>
                 </button>
@@ -172,8 +200,8 @@
                 </button>
             </div>
 
-            <div class="btn-group whiteboard-edit-group">
-                <button hidden id="addImgToCanvasBtn" title="Upload Image to whiteboard" type="button">
+            <div class="btn-group whiteboard-edit-group ">
+                <button id="addImgToCanvasBtn" title="Upload Image to whiteboard" type="button">
                     <i class="fas fa-image"></i>
                     <i
                         style="
@@ -209,7 +237,7 @@
                 <input style="display: none" id="myFile" type="file" />
             </div>
 
-            <div class="btn-group">
+            <div class="btn-group ">
                 <button id="saveAsImageBtn" title="Save whiteboard as image" type="button">
                     <i class="fas fa-image"></i>
                     <i
@@ -268,7 +296,7 @@
                     <i class="fas fa-info-circle"></i>
                 </button>
             </div>
-
+<!--            </div>-->
             <div class="btn-group minGroup">
                 <button
                     style="width: 100%; padding: 11px 11px"
@@ -288,6 +316,8 @@
                     ></i>
                 </button>
             </div>
+
+
         </div>
 
         <div id="whiteboardInfoContainer">
@@ -299,7 +329,6 @@
         </div>
 
         <div id="shareWhiteboardDialog" class="displayNone">
-
             <div class="shareWhiteboardDialogContent">
                 <button
                     class="shareWhiteboardDialogItem"
@@ -321,13 +350,6 @@
                     id="shareWhiteboardDialogMessage"
                 ></p>
             </div>
-
-
         </div>
-
-    </div>
-
-
-
     </body>
 </html>
