@@ -21,6 +21,8 @@ import {
     faInfoCircle,
     faGlobe,
     faStickyNote,
+    faCrop,
+    faCross,
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faSquare,
@@ -28,6 +30,7 @@ import {
     faFile,
     faFileAlt,
     faPlusSquare,
+    faArrowAltCircleLeft
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -48,6 +51,7 @@ library.add(
     faSortDown,
     faExpandArrowsAlt,
     faSquare,
+    faCross,
     faCircle,
     faFile,
     faFileAlt,
@@ -56,7 +60,8 @@ library.add(
     faLockOpen,
     faInfoCircle,
     faGlobe,
-    faStickyNote
+    faStickyNote,
+    faArrowAltCircleLeft
 );
 
 dom.i2svg();

@@ -287,6 +287,27 @@ function initWhiteboard() {
             .click(function () {
                 whiteboard.redoWhiteboardClick();
             });
+        $("#whiteboardFlipVertical")
+            .click(function () {
+
+                if ($('#whiteboardCanvas').css('transform') == 'none') {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateX(180deg)' });
+                } else {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateX(0deg)' });
+                    $("#whiteboardCanvas").css({ 'transform': 'none' });
+                }
+                
+            });
+        $("#whiteboardFlipHorizontal")
+            .click(function () {
+                if ($('#whiteboardCanvas').css('transform') == 'none') {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateY(180deg)' });
+
+                } else {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateY(0deg)' });
+                    $("#whiteboardCanvas").css({ 'transform': 'none' });
+                }
+            });
 
         // view only
         $("#whiteboardLockBtn")

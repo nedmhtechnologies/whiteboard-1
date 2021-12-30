@@ -91,7 +91,11 @@ module.exports = {
             [
                 "line",
                 "pen",
+                "penDotted",
                 "rect",
+                "arrow",
+                "dotted",
+                "arrowTab",
                 "circle",
                 "eraser",
                 "addImgBG",
@@ -103,6 +107,7 @@ module.exports = {
                 "setTextboxPosition",
                 "setTextboxFontSize",
                 "setTextboxFontColor",
+                "setTextboxBackgroundColor",
             ].includes(tool)
         ) {
             let savedBoard = this.loadStoredData(wid);

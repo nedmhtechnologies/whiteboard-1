@@ -126,7 +126,7 @@ button {
 }
 
 .textBox.active {
-    border: 1px dashed gray;
+    border: 0px dashed gray;
 }
 
 .textBox > .removeIcon,
@@ -204,5 +204,5 @@ button {
     width: 100%;
     height: 100%;
 
-
 }
+

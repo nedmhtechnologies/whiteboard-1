@@ -22,7 +22,14 @@ const shortcutFunctions = {
         $(".whiteboard-tool[tool=pen]").click();
         whiteboard.redrawMouseCursor();
     }),
+    setTool_penDotted: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penDotted]").click();
+        whiteboard.redrawMouseCursor();
+    }),
     setTool_line: defineShortcut(() => $(".whiteboard-tool[tool=line]").click()),
+    setTool_arrow: defineShortcut(() => $(".whiteboard-tool[tool=arrow]").click()),
+    setTool_dotted: defineShortcut(() => $(".whiteboard-tool[tool=dotted]").click()),
+    setTool_arrowTab: defineShortcut(() => $(".whiteboard-tool[tool=arrowTab]").click()),
     setTool_rect: defineShortcut(() => $(".whiteboard-tool[tool=rect]").click()),
     setTool_circle: defineShortcut(() => $(".whiteboard-tool[tool=circle]").click()),
     setTool_text: defineShortcut(() => $(".whiteboard-tool[tool=text]").click()),

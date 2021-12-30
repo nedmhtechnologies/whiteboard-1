@@ -38,7 +38,12 @@ const whiteboard = {
     mouseOverlay: null,
     ownCursor: null,
     penSmoothLastCoords: [],
+    penSmoothLastCoordsDotted: [],
     svgLine: null,
+
+    svgArrow: null,
+    svgArrowTab: null,
+    svgDottedLine: null,
     svgRect: null,
     svgCirle: null,
     drawBuffer: [],
@@ -138,7 +143,6 @@ const whiteboard = {
 
             $("#whiteboardCanvas").outerHeight($(window).height()-$("#whiteboardCanvas").offset().top- Math.abs($("#whiteboardCanvas").outerHeight(true) - $("#whiteboardCanvas").outerHeight()));
             $(window).on("resize", function(){
-                console.log("using this ");
                 $("#whiteboardCanvas").outerHeight($(window).height()-$("#whiteboardCanvas").offset().top- Math.abs($("#whiteboardCanvas").outerHeight(true) - $("#whiteboardCanvas").outerHeight()));
             });
 
@@ -158,7 +162,7 @@ const whiteboard = {
             _this.drawFlag = true;
 
             const currentPos = Point.fromEvent(e);
-
+  
             if (_this.tool === "pen") {
                 _this.penSmoothLastCoords = [
                     currentPos.x,
@@ -168,7 +172,18 @@ const whiteboard = {
                     currentPos.x,
                     currentPos.y,
                 ];
-            } else if (_this.tool === "eraser") {
+            }
+            else if (_this.tool === "penDotted") {
+                _this.penSmoothLastCoordsDotted = [
+                    currentPos.x,
+                    currentPos.y,
+                    currentPos.x,
+                    currentPos.y,
+                    currentPos.x,
+                    currentPos.y,
+                ];
+            }
+                else if(_this.tool === "eraser") {
                 _this.drawEraserLine(
                     currentPos.x,
                     currentPos.y,
@@ -191,7 +206,82 @@ const whiteboard = {
                 _this.svgLine.setAttribute("x2", currentPos.x);
                 _this.svgLine.setAttribute("y2", currentPos.y);
                 _this.svgContainer.append(_this.svgLine);
-            } else if (_this.tool === "rect" || _this.tool === "recSelect") {
+
+            }
+            else if (_this.tool === "dotted") {
+                debugger;
+                _this.startCoords = currentPos;
+                _this.svgDottedLine = document.createElementNS(svgns, "dotted");
+                _this.svgDottedLine.setAttribute("stroke", "gray");
+                _this.svgDottedLine.setAttribute("stroke-dasharray", "5, 5");
+                _this.svgDottedLine.setAttribute("x1", currentPos.x);
+                _this.svgDottedLine.setAttribute("y1", currentPos.y);
+                _this.svgDottedLine.setAttribute("x2", currentPos.x);
+                _this.svgDottedLine.setAttribute("y2", currentPos.y);
+                _this.svgContainer.append(_this.svgDottedLine);
+
+                
+
+
+
+
+
+
+
+
+
+
+            }
+            else if (_this.tool === "arrow") {
+                debugger;
+                _this.startCoords = currentPos;
+                _this.svgArrow = document.createElementNS(svgns, "arrow");
+                _this.svgArrow.setAttribute("stroke", "gray");
+                _this.svgArrow.setAttribute("stroke-dasharray", "5, 5");
+                _this.svgArrow.setAttribute("x1", currentPos.x);
+                _this.svgArrow.setAttribute("y1", currentPos.y);
+                _this.svgArrow.setAttribute("x2", currentPos.x);
+                _this.svgArrow.setAttribute("y2", currentPos.y);
+                _this.svgContainer.append(_this.svgArrow);
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+            else if (_this.tool === "arrowTab") {
+                debugger;
+                _this.startCoords = currentPos;
+                _this.svgArrowTab = document.createElementNS(svgns, "arrowTab");
+                _this.svgArrowTab.setAttribute("stroke", "gray");
+                _this.svgArrowTab.setAttribute("stroke-dasharray", "5, 5");
+                _this.svgArrowTab.setAttribute("x1", currentPos.x);
+                _this.svgArrowTab.setAttribute("y1", currentPos.y);
+                _this.svgArrowTab.setAttribute("x2", currentPos.x);
+                _this.svgArrowTab.setAttribute("y2", currentPos.y);
+                _this.svgContainer.append(_this.svgArrowTab);
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+            else if (_this.tool === "rect" || _this.tool === "recSelect") {
                 _this.svgContainer.find("rect").remove();
                 _this.svgRect = document.createElementNS(svgns, "rect");
                 _this.svgRect.setAttribute("stroke", "gray");
@@ -287,11 +377,153 @@ const whiteboard = {
                     th: _this.thickness,
                 });
                 _this.svgContainer.find("line").remove();
-            } else if (_this.tool === "pen") {
+            }
+            if (_this.tool === "lineDotted") {
+                if (_this.pressedKeys.shift) {
+                    currentPos = _this.getRoundedAngles(currentPos);
+                }
+                _this.drawPenLineDotted(
+                    currentPos.x,
+                    currentPos.y,
+                    _this.startCoords.x,
+                    _this.startCoords.y,
+                    _this.drawcolor,
+                    _this.thickness
+                );
+                _this.sendFunction({
+                    t: _this.tool,
+                    d: [currentPos.x, currentPos.y, _this.startCoords.x, _this.startCoords.y],
+                    c: _this.drawcolor,
+                    th: _this.thickness,
+                });
+                _this.svgContainer.find("line").remove();
+            }
+            else if (_this.tool === "dotted") {
+
+
+                /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
+                if (_this.pressedKeys.shift) {
+                    currentPos = _this.getRoundedAngles(currentPos);
+                }
+                _this.drawDotted(
+                    currentPos.x,
+                    currentPos.y,
+                    _this.startCoords.x,
+                    _this.startCoords.y,
+                    _this.drawcolor,
+                    _this.thickness,
+                    _this.thickness*2,
+                    _this.thickness * 2
+                );
+
+                _this.sendFunction({
+                    t: _this.tool,
+                    d: [currentPos.x, currentPos.y, _this.startCoords.x, _this.startCoords.y],
+                    c: _this.drawcolor,
+                    th: _this.thickness,
+                    //aWidth: _this.aWidth,
+                    //aLength: _this.aLength,
+                    //arrowStart: _this.arrowStart,
+                    //arrowEnd: _this.arrowEnd,
+
+                });
+
+
+
+
+
+
+                _this.svgContainer.find("dotted").remove();
+            }
+            else if (_this.tool === "arrow") {
+
+
+        /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
+                if (_this.pressedKeys.shift) {
+                    currentPos = _this.getRoundedAngles(currentPos);
+                }
+                _this.drawArrow(
+                    currentPos.x,
+                    currentPos.y,
+                    _this.startCoords.x,
+                    _this.startCoords.y,
+                    _this.drawcolor,
+                    _this.thickness,
+                    5,
+                    5,
+                    true,
+                    false
+                );
+
+                _this.sendFunction({
+                    t: _this.tool,
+                    d: [currentPos.x, currentPos.y, _this.startCoords.x, _this.startCoords.y],
+                    c: _this.drawcolor,
+                    th: _this.thickness,
+                    //aWidth: _this.aWidth,
+                    //aLength: _this.aLength,
+                    //arrowStart: _this.arrowStart,
+                    //arrowEnd: _this.arrowEnd,
+
+                });
+
+
+
+
+
+
+                _this.svgContainer.find("arrow").remove();
+            }
+            else if (_this.tool === "arrowTab") {
+
+
+                /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
+                if (_this.pressedKeys.shift) {
+                    currentPos = _this.getRoundedAngles(currentPos);
+                }
+                _this.drawArrowTab(
+                    currentPos.x,
+                    currentPos.y,
+                    _this.startCoords.x,
+                    _this.startCoords.y,
+                    _this.drawcolor,
+                    _this.thickness,
+                    5,
+                    5,
+                    true,
+                    false
+                );
+
+                _this.sendFunction({
+                    t: _this.tool,
+                    d: [currentPos.x, currentPos.y, _this.startCoords.x, _this.startCoords.y],
+                    c: _this.drawcolor,
+                    th: _this.thickness,
+                    //aWidth: _this.aWidth,
+                    //aLength: _this.aLength,
+                    //arrowStart: _this.arrowStart,
+                    //arrowEnd: _this.arrowEnd,
+
+                });
+
+
+
+
+
+
+                _this.svgContainer.find("arrowTab").remove();
+            }
+            else if (_this.tool === "pen") {
                 _this.drawId--;
                 _this.pushPointSmoothPen(currentPos.x, currentPos.y);
                 _this.drawId++;
-            } else if (_this.tool === "rect") {
+            }
+            else if (_this.tool === "penDotted") {
+                _this.drawId--;
+                _this.pushPointSmoothPenDotted(currentPos.x, currentPos.y);
+                _this.drawId++;
+            }
+            else if (_this.tool === "rect") {
                 if (_this.pressedKeys.shift) {
                     if (
                         (currentPos.x - _this.startCoords.x) *
@@ -503,7 +735,10 @@ const whiteboard = {
             if (_this.drawFlag) {
                 if (_this.tool === "pen") {
                     _this.pushPointSmoothPen(currentPos.x, currentPos.y);
-                } else if (_this.tool === "eraser") {
+                } else if (_this.tool === "penDotted") {
+                    _this.pushPointSmoothPenDotted(currentPos.x, currentPos.y);
+                }
+                else if (_this.tool === "eraser") {
                     _this.drawEraserLine(
                         currentPos.x,
                         currentPos.y,
@@ -527,7 +762,13 @@ const whiteboard = {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
                 if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
-            } else if (_this.tool === "line") {
+            }
+            else if (_this.tool === "penDotted") {
+                const left = currentPos.x - _this.thickness / 2;
+                const top = currentPos.y - _this.thickness / 2;
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
+            }
+            else if (_this.tool === "line") {
                 if (_this.svgLine) {
                     let posToUse = currentPos;
                     if (_this.pressedKeys.shift) {
@@ -536,7 +777,38 @@ const whiteboard = {
                     _this.svgLine.setAttribute("x2", posToUse.x);
                     _this.svgLine.setAttribute("y2", posToUse.y);
                 }
-            } else if (_this.tool === "rect" || (_this.tool === "recSelect" && _this.drawFlag)) {
+                else if (_this.tool === "dotted") {
+                    if (_this.svgDottedLine) {
+                        let posToUse = currentPos;
+                        if (_this.pressedKeys.shift) {
+                            posToUse = _this.getRoundedAngles(currentPos);
+                        }
+                        _this.svgDottedLine.setAttribute("x2", posToUse.x);
+                        _this.svgDottedLine.setAttribute("y2", posToUse.y);
+                    }
+                }            }
+            else if (_this.tool === "arrow") {
+                if (_this.svgArrow) {
+                    let posToUse = currentPos;
+                    if (_this.pressedKeys.shift) {
+                        posToUse = _this.getRoundedAngles(currentPos);
+                    }
+                    _this.svgArrow.setAttribute("x2", posToUse.x);
+                    _this.svgArrow.setAttribute("y2", posToUse.y);
+                }
+            }
+            else if (_this.tool === "arrowTab") {
+                if (_this.svgArrowTab) {
+                    let posToUse = currentPos;
+                    if (_this.pressedKeys.shift) {
+                        posToUse = _this.getRoundedAngles(currentPos);
+                    }
+                    _this.svgArrowTab.setAttribute("x2", posToUse.x);
+                    _this.svgArrowTab.setAttribute("y2", posToUse.y);
+                }
+            }
+
+            else if (_this.tool === "rect" || (_this.tool === "recSelect" && _this.drawFlag)) {
                 if (_this.svgRect) {
                     const width = Math.abs(currentPos.x - _this.startCoords.x);
                     let height = Math.abs(currentPos.y - _this.startCoords.y);
@@ -596,7 +868,7 @@ const whiteboard = {
                 color = "#00000000";
                 widthHeight = widthHeight * 2;
             }
-            if (_this.tool === "eraser" || _this.tool === "pen") {
+            if (_this.tool === "eraser" || _this.tool === "pen" || _this.tool === "penDotted") {
                 _this.ownCursor = $(
                     '<div id="ownCursor" style="background:' +
                         color +
@@ -621,6 +893,9 @@ const whiteboard = {
         _this.ctx.globalCompositeOperation = _this.oldGCO;
         if (_this.ownCursor) _this.ownCursor.remove();
         _this.svgContainer.find("line").remove();
+        _this.svgContainer.find("arrow").remove();
+        _this.svgContainer.find("dotted").remove();
+        _this.svgContainer.find("arrowTab").remove();
         _this.svgContainer.find("rect").remove();
         _this.svgContainer.find("circle").remove();
         _this.sendFunction({ t: "cursor", event: "out" });
@@ -679,6 +954,29 @@ const whiteboard = {
             });
         }
     },
+    pushPointSmoothPenDotted: function (X, Y) {
+        var _this = this;
+        if (_this.penSmoothLastCoordsDotted.length >= 8) {
+            _this.penSmoothLastCoordsDotted = [
+                _this.penSmoothLastCoordsDotted[2],
+                _this.penSmoothLastCoordsDotted[3],
+                _this.penSmoothLastCoordsDotted[4],
+                _this.penSmoothLastCoordsDotted[5],
+                _this.penSmoothLastCoordsDotted[6],
+                _this.penSmoothLastCoordsDotted[7],
+            ];
+        }
+        _this.penSmoothLastCoordsDotted.push(X, Y);
+        if (_this.penSmoothLastCoordsDotted.length >= 8) {
+            _this.drawPenSmoothLineDotted(_this.penSmoothLastCoordsDotted, _this.drawcolor, _this.thickness);
+            _this.sendFunction({
+                t: _this.tool,
+                d: _this.penSmoothLastCoordsDotted,
+                c: _this.drawcolor,
+                th: _this.thickness,
+            });
+        }
+    },
     dragCanvasRectContent: function (xf, yf, xt, yt, width, height) {
         var tempCanvas = document.createElement("canvas");
         tempCanvas.width = width;
@@ -709,6 +1007,98 @@ const whiteboard = {
         _this.ctx.stroke();
         _this.ctx.closePath();
     },
+    drawDotted: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength) {
+        var _this = this;
+        _this.ctx.setLineDash([aWidth, aLength]);
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(toX, toY);
+        _this.ctx.strokeStyle = color;
+        _this.ctx.lineWidth = thickness;
+        _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.stroke();
+        _this.ctx.closePath();
+        _this.ctx.setLineDash([0, 0]);
+    },
+    drawArrow: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+        var _this = this;
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(toX, toY);
+        _this.ctx.strokeStyle = color;
+        _this.ctx.lineWidth = thickness;
+        _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.stroke();
+        _this.ctx.closePath();
+
+        var dx = toX - fromX;
+        var dy = toY - fromY;
+        var angle = Math.atan2(dy, dx);
+        var length = Math.sqrt(dx * dx + dy * dy);
+        _this.ctx.translate(fromX, fromY);
+        _this.ctx.rotate(angle);
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(0, 0);
+        _this.ctx.lineTo(length, 0);
+        if (arrowStart) {
+            _this.ctx.moveTo(aLength, -aWidth);
+            _this.ctx.lineTo(0, 0);
+            _this.ctx.lineTo(aLength, aWidth);
+        }
+        if (arrowEnd) {
+            _this.ctx.moveTo(length - aLength, -aWidth);
+            _this.ctx.lineTo(length, 0);
+            _this.ctx.lineTo(length - aLength, aWidth);
+        }
+        _this.ctx.stroke();
+        _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        _this.ctx.closePath();
+
+
+
+
+
+
+    },
+    drawArrowTab: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+        var _this = this;
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(toX, toY);
+        _this.ctx.strokeStyle = color;
+        _this.ctx.lineWidth = thickness;
+        _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.stroke();
+        _this.ctx.closePath();
+
+
+        var dx = toX - fromX;
+        var dy = toY - fromY;
+        var angle = Math.atan2(dy, dx);
+        var length = Math.sqrt(dx * dx + dy * dy);
+        _this.ctx.translate(fromX, fromY);
+        _this.ctx.rotate(angle);
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(0, 0);
+        _this.ctx.lineTo(length, 0);
+        if (arrowStart) {
+            _this.ctx.moveTo(-aLength, -aWidth);
+            _this.ctx.lineTo(-aLength, 0);
+            _this.ctx.lineTo(-aLength, aWidth-1);
+        }
+        if (arrowEnd) {
+            _this.ctx.moveTo(length - aLength, -aWidth);
+            _this.ctx.lineTo(length, 0);
+            _this.ctx.lineTo(length - aLength, aWidth);
+        }
+        _this.ctx.stroke();
+        _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        _this.ctx.closePath();
+
+
+
+
+    },
     drawPenSmoothLine: function (coords, color, thickness) {
         var _this = this;
         var xm1 = coords[0];
@@ -735,6 +1125,35 @@ const whiteboard = {
         _this.ctx.lineCap = _this.lineCap;
         _this.ctx.stroke();
         _this.ctx.closePath();
+    },
+    drawPenSmoothLineDotted: function (coords, color, thickness) {
+        var _this = this;
+        _this.ctx.setLineDash([5,5]);
+        var xm1 = coords[0];
+        var ym1 = coords[1];
+        var x0 = coords[2];
+        var y0 = coords[3];
+        var x1 = coords[4];
+        var y1 = coords[5];
+        var x2 = coords[6];
+        var y2 = coords[7];
+        var length = Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
+        var steps = Math.ceil(length / 5);
+        _this.ctx.beginPath();
+        _this.ctx.moveTo(x0, y0);
+        if (steps == 0) {
+            _this.ctx.lineTo(x0, y0);
+        }
+        for (var i = 0; i < steps; i++) {
+            var point = lanczosInterpolate(xm1, ym1, x0, y0, x1, y1, x2, y2, (i + 1) / steps);
+            _this.ctx.lineTo(point[0], point[1]);
+        }
+        _this.ctx.strokeStyle = color;
+        _this.ctx.lineWidth = thickness;
+        _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.stroke();
+        _this.ctx.closePath();
+        _this.ctx.setLineDash([0,0]);
     },
     drawEraserLine: function (fromX, fromY, toX, toY, thickness) {
         var _this = this;
@@ -910,6 +1329,117 @@ const whiteboard = {
         // render newly added icons
         dom.i2svg();
     },
+
+    addImgToCanvasByUrl: function (url) {
+        var _this = this;
+        var oldTool = _this.tool;
+
+        const { imageURL } = ConfigService;
+        var finalURL = url;
+        if (imageURL && url.startsWith("../../")) {
+            finalURL = imageURL + url;
+        }
+
+        var img = this.imgWithSrc(finalURL).css({ width: "100%", height: "100%" });
+        finalURL = img.attr("src");
+
+        _this.setTool("mouse"); //Set to mouse tool while dropping to prevent errors
+        _this.imgDragActive = true;
+        _this.mouseOverlay.css({ cursor: "default" });
+        var imgDiv = $(
+            '<div class="dragMe" style="border: 2px dashed gray; position:absolute; left:200px; top:200px; min-width:160px; min-height:100px; cursor:move;">' +
+            '<div style="position:absolute; right:5px; top:3px;">' +
+            '<button draw="1" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToCanvasBtn btn btn-default">Draw to canvas</button> ' +
+            '<button draw="0" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToBackgroundBtn btn btn-default">Add to background</button> ' +
+            '<button style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="xCanvasBtn btn btn-default">x</button>' +
+            "</div>" +
+            '<i style="position:absolute; bottom: -4px; right: 2px; font-size: 2em; color: gray; transform: rotate(-45deg);" class="fas fa-sort-down" aria-hidden="true"></i>' +
+            '<div class="rotationHandle" style="position:absolute; bottom: -30px; left: 0px; width:100%; text-align:center; cursor:ew-resize;"><i class="fa fa-undo"></i></div>' +
+            "</div>"
+        );
+        imgDiv.prepend(img);
+        imgDiv
+            .find(".xCanvasBtn")
+            .off("click")
+            .click(function () {
+                _this.imgDragActive = false;
+                _this.refreshCursorAppearance();
+                imgDiv.remove();
+                _this.setTool(oldTool);
+            });
+        var rotationAngle = 0;
+        var recoupLeft = 0;
+        var recoupTop = 0;
+        var p = imgDiv.position();
+        var left = 200;
+        var top = 200;
+        imgDiv
+            .find(".addToCanvasBtn,.addToBackgroundBtn")
+            .off("click")
+            .click(function () {
+                var draw = $(this).attr("draw");
+                _this.imgDragActive = false;
+
+                var width = imgDiv.width();
+                var height = imgDiv.height();
+
+                if (draw == "1") {
+                    //draw image to canvas
+                    _this.drawImgToCanvas(finalURL, width, height, left, top, rotationAngle);
+                } else {
+                    //Add image to background
+                    _this.drawImgToBackground(finalURL, width, height, left, top, rotationAngle);
+                }
+                _this.sendFunction({
+                    t: "addImgBG",
+                    draw: draw,
+                    url: finalURL,
+                    d: [width, height, left, top, rotationAngle],
+                });
+                _this.drawId++;
+                imgDiv.remove();
+                _this.refreshCursorAppearance();
+                _this.setTool(oldTool);
+            });
+        _this.mouseOverlay.append(imgDiv);
+
+        imgDiv.draggable({
+            start: function (event, ui) {
+                var left = parseInt($(this).css("left"), 10);
+                left = isNaN(left) ? 0 : left;
+                var top = parseInt($(this).css("top"), 10);
+                top = isNaN(top) ? 0 : top;
+                recoupLeft = left - ui.position.left;
+                recoupTop = top - ui.position.top;
+            },
+            drag: function (event, ui) {
+                ui.position.left += recoupLeft;
+                ui.position.top += recoupTop;
+            },
+            stop: function (event, ui) {
+                left = ui.position.left;
+                top = ui.position.top;
+            },
+        });
+        imgDiv.resizable();
+        var params = {
+            // Callback fired on rotation start.
+            start: function (event, ui) { },
+            // Callback fired during rotation.
+            rotate: function (event, ui) {
+                //console.log(ui)
+            },
+            // Callback fired on rotation end.
+            stop: function (event, ui) {
+                rotationAngle = ui.angle.current;
+            },
+            handle: imgDiv.find(".rotationHandle"),
+        };
+        imgDiv.rotatable(params);
+
+        // render newly added icons
+        dom.i2svg();
+    },
     drawImgToBackground(url, width, height, left, top, rotationAngle) {
         const px = (v) => Number(v).toString() + "px";
         this.imgContainer.append(
@@ -934,13 +1464,14 @@ const whiteboard = {
         newLocalBox
     ) {
         var _this = this;
-        console.log(isStickyNote);
         var cssclass = "textBox";
         if (isStickyNote) {
             cssclass += " stickyNote";
         }
-        var textBox = $(
-            '<div id="' +
+        var textBox = "";
+        if (isStickyNote) {
+            textBox = $(
+                '<div id="' +
                 txId +
                 '" class="' +
                 cssclass +
@@ -960,7 +1491,30 @@ const whiteboard = {
                 '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
                 '<div title="move textbox" class="moveIcon" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
                 "</div>"
-        );
+            );
+        } else {
+            textBox = $(
+                '<div id="' +
+                txId +
+                '" class=" ' +
+                cssclass +
+                '" style="font-family: Monospace; position:absolute; top:' +
+                top +
+                "px; left:" +
+                left +
+                "px;" +
+                ';">' +
+                '<div contentEditable="true" spellcheck="false" class="textContent" style="outline: none; font-size:' +
+                fontsize +
+                "em; color:" +
+                textcolor +
+                '; min-width:50px; min-height:50px"></div>' +
+                '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
+                '<div title="move textbox" class="moveIcon " style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+
+                "</div>"
+            );
+        }
         _this.latestActiveTextBoxId = txId;
         textBox.click(function (e) {
             e.preventDefault();
@@ -1227,10 +1781,23 @@ const whiteboard = {
                 if (data.length == 4) {
                     //Only used for old json imports
                     _this.drawPenLine(data[0], data[1], data[2], data[3], color, thickness);
-                } else {
+                }else {
                     _this.drawPenSmoothLine(data, color, thickness);
                 }
-            } else if (tool === "rect") {
+            }
+            else if (tool === "penDotted") {
+                _this.drawPenSmoothLineDotted(data, color, thickness);
+            }
+            else if (tool === "dotted") {
+                _this.drawDotted(data[0], data[1], data[2], data[3], color, thickness, thickness * 2, thickness*2);
+            }
+            else if (tool === "arrow") {
+                _this.drawArrow(data[0], data[1], data[2], data[3], color, thickness, 5, 5, true, false);
+            }
+            else if (tool === "arrowTab") {
+                _this.drawArrowTab(data[0], data[1], data[2], data[3], color, thickness, 5, 5, true, false);
+            }
+            else if (tool === "rect") {
                 _this.drawRec(data[0], data[1], data[2], data[3], color, thickness);
             } else if (tool === "circle") {
                 _this.drawCircle(data[0], data[1], data[2], color, thickness);
@@ -1317,7 +1884,11 @@ const whiteboard = {
             [
                 "line",
                 "pen",
+                "penDotted",
                 "rect",
+                "arrow",
+                "dotted",
+                "arrowTab",
                 "circle",
                 "eraser",
                 "addImgBG",
@@ -1488,8 +2059,12 @@ const whiteboard = {
             [
                 "line",
                 "pen",
+                "penDotted",
                 "rect",
-                "circle",
+                "arrow",
+                "dotted",
+                "arrowTab",
+                "circle",                
                 "eraser",
                 "addImgBG",
                 "recSelect",
@@ -1509,7 +2084,7 @@ const whiteboard = {
     refreshCursorAppearance() {
         //Set cursor depending on current active tool
         var _this = this;
-        if (_this.tool === "pen" || _this.tool === "eraser") {
+        if (_this.tool === "pen" || _this.tool === "eraser" || _this.tool === "penDotted") {
             _this.mouseOverlay.css({ cursor: "none" });
         } else if (_this.tool === "mouse") {
             this.mouseOverlay.css({ cursor: "default" });
