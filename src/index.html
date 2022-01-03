@@ -429,4 +429,31 @@
             </div>
         </div>
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            var currentLocation = window.location;
+
+            var url = currentLocation.href;
+            let paramString = url.split('?')[1];
+            let queryString = new URLSearchParams(paramString);
+            for(let pair of queryString.entries()) {
+                console.log("Key is:" + pair[0]);
+
+                if(pair[0]=="readonly")
+                {
+                    console.log("hidding");
+                    document.getElementById('toolbar').style.visibility = "hidden";
+                }
+
+
+            }
+
+
+        });
+
+    </script>
+
 </html>
