@@ -205,4 +205,16 @@ button {
     height: 100%;
 
 }
+.SccorPlayer {
+    content: url(http://placehold.it/50x150);
+}
+.hotqcontent {
+}
 
+.hotqcontent span.nested {
+        display: none;
+    }
+
+.hotqcontent:hover .nested {
+        display: block;
+    }

@@ -337,7 +337,7 @@ function initWhiteboard() {
                     $(".activeToolIcon").html($(this).html()); //Set Active icon the same as the button icon
                 }
 
-                if (activeTool == "text" || activeTool == "stickynote") {
+                if (activeTool == "text" || activeTool == "stickynote" || activeTool == "soccerPlayer" || activeTool =="circleWithCross") {
                     $("#textboxBackgroundColorPickerBtn").show();
                 } else {
                     $("#textboxBackgroundColorPickerBtn").hide();
@@ -953,7 +953,7 @@ function initWhiteboard() {
                 }
             }
 
-            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote") {
+            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote" && whiteboard.tool != "soccerPlayer" && whiteboard.tool != "circleWithCross") {
                 showBasicAlert(
                     "Please Drag&Drop the image or pdf into the Whiteboard. (Browsers don't allow copy+past from the filesystem directly)"
                 );

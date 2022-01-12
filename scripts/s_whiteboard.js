@@ -97,6 +97,7 @@ module.exports = {
                 "dotted",
                 "arrowTab",
                 "circle",
+                "circleFixed",
                 "eraser",
                 "addImgBG",
                 "recSelect",
