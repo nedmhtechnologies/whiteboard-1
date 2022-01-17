@@ -91,10 +91,12 @@ module.exports = {
             [
                 "line",
                 "pen",
+                "penArrow",
                 "penDotted",
                 "rect",
                 "arrow",
                 "dotted",
+                "dottedArrow",
                 "arrowTab",
                 "circle",
                 "circleFixed",

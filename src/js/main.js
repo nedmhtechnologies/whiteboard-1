@@ -337,7 +337,7 @@ function initWhiteboard() {
                     $(".activeToolIcon").html($(this).html()); //Set Active icon the same as the button icon
                 }
 
-                if (activeTool == "text" || activeTool == "stickynote" || activeTool == "soccerPlayer" || activeTool =="circleWithCross") {
+                if (activeTool == "text" || activeTool == "stickynote" || activeTool == "soccerPlayer" || activeTool == "circleWithCross" || activeTool == "CenterCross" || activeTool == "RightCross" || activeTool == "leftCross" ) {
                     $("#textboxBackgroundColorPickerBtn").show();
                 } else {
                     $("#textboxBackgroundColorPickerBtn").hide();
@@ -953,7 +953,7 @@ function initWhiteboard() {
                 }
             }
 
-            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote" && whiteboard.tool != "soccerPlayer" && whiteboard.tool != "circleWithCross") {
+            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote" && whiteboard.tool != "soccerPlayer" && whiteboard.tool != "circleWithCross" && whiteboard.tool != "CenterCross" && whiteboard.tool != "RightCross" && whiteboard.tool != "leftCross") {
                 showBasicAlert(
                     "Please Drag&Drop the image or pdf into the Whiteboard. (Browsers don't allow copy+past from the filesystem directly)"
                 );
