@@ -1335,44 +1335,20 @@ const whiteboard = {
         var steps = Math.ceil(length / 5);
         _this.ctx.beginPath();
         _this.ctx.moveTo(x0, y0);
-        var fromX = null;
-        var fromY = null;
-        var toX = null;
-        var toY = null;
+       
         if (steps == 0) {
             _this.ctx.lineTo(x0, y0);
         }
         for (var i = 0; i < steps; i++) {
             var point = lanczosInterpolate(xm1, ym1, x0, y0, x1, y1, x2, y2, (i + 1) / steps);
             _this.ctx.lineTo(point[0], point[1]);
-            if (i == steps - 2) {
-                fromX = point[0];
-                fromY = point[1];
-            }
-            if (i == steps - 1) {
-                toX = point[0];
-                toY = point[1];
-            }
+           
         }
         _this.ctx.strokeStyle = color;
         _this.ctx.lineWidth = thickness;
         _this.ctx.lineCap = _this.lineCap;
         _this.ctx.stroke();
         _this.ctx.closePath();
-        // draw the starting arrowhead
-        if (arrowStart) {
-            var startRadians = Math.atan((toY - fromY) / (toX - fromX));
-            startRadians += ((toX > fromX) ? -90 : 90) * Math.PI / 180;
-            this.drawArrowhead(_this.ctx, fromX, fromY, startRadians);
-            // draw the ending arrowhead
-        }
-        if (arrowEnd) {
-            var endRadians = Math.atan((toY - fromY) / (this.x2 - this.x1));
-            endRadians += ((toX > fromX) ? 90 : -90) * Math.PI / 180;
-            this.drawArrowhead(_this.ctx, toX, toY, endRadians);
-
-        }
-       
     },
     drawPenSmoothLineDotted: function (coords, color, thickness) {
         var _this = this;
