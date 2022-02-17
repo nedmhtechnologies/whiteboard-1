@@ -91,6 +91,7 @@ module.exports = {
             [
                 "line",
                 "pen",
+                "penTab",
                 "penArrow",
                 "penDotted",
                 "penDottedArrow",
@@ -101,6 +102,7 @@ module.exports = {
                 "arrowTab",
                 "circle",
                 "circleFixed",
+                "circleFilled",
                 "eraser",
                 "addImgBG",
                 "recSelect",
