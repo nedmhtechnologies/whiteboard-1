@@ -95,6 +95,8 @@ module.exports = {
                 "penArrow",
                 "penDotted",
                 "penDottedArrow",
+                "penDottedCircle",
+                "penCircle",
                 "rect",
                 "arrow",
                 "dotted",
