@@ -306,7 +306,6 @@ const whiteboard = {
                 _this.svgContainer.append(_this.svgArrow);
             }
             else if (_this.tool === "arrowTab") {
-                debugger;
                 _this.startCoords = currentPos;
                 _this.svgArrowTab = document.createElementNS(svgns, "arrowTab");
                 _this.svgArrowTab.setAttribute("stroke", "gray");
@@ -318,7 +317,6 @@ const whiteboard = {
                 _this.svgContainer.append(_this.svgArrowTab);
             }
             else if (_this.tool === "arrowDootedTab") {
-                debugger;
                 _this.startCoords = currentPos;
                 _this.svgArrowDootedTab = document.createElementNS(svgns, "arrowDootedTab");
                 _this.svgArrowDootedTab.setAttribute("stroke", "gray");
@@ -944,7 +942,7 @@ const whiteboard = {
                 _this.svgContainer.find("circleFilled").remove();
             }
             else if (_this.tool === "circleFixed") {
-                const r = 5;
+                const r = 12;
                 _this.drawCircleFixed(
                     _this.startCoords.x,
                     _this.startCoords.y,
@@ -2215,6 +2213,9 @@ const whiteboard = {
     },
     drawCircleFixed: function (fromX, fromY, radius, color, thickness) {
         var _this = this;
+        console.log(radius * thickness);
+        console.log(25 * thickness);
+        console.log("fixed circke end ");
         _this.ctx.beginPath();
         _this.ctx.arc(fromX, fromY, radius * thickness, 0, 2 * Math.PI, false);
         _this.ctx.lineWidth = thickness;
@@ -2512,9 +2513,9 @@ const whiteboard = {
         newLocalBox
     ) {
         var _this = this;
-
+        console.log(fontsize * 50);
+        console.log("svg end ");
         var cssclass = "textBox";
-        console.log(isStickyNote);
         var textBox = "";
         if (isStickyNote == "stickynote") {
             cssclass += " stickyNote";
@@ -3202,7 +3203,6 @@ const whiteboard = {
                     backgroundColor: "rgba(0, 0, 0, 0)",
                     removeContainer: true,
                 }).then(function (canvas) {
-                    console.log("canvas", canvas);
 
                     destCtx.drawImage(canvas, left, top);
                     textBoxCnt--;
