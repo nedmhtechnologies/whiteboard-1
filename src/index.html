@@ -151,18 +151,18 @@
                         class="whiteboard-tool">
                     <img class="" src="" />
                 </button>
-                
-                
+
+
 
         </button>
 
-               
-               
-               
-               
-               
 
-              
+
+
+
+
+
+
                 <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-rectangle.png); background-position: center; background-repeat: no-repeat;"
                         tool="rect" title="draw a rectangle" type="button" class="whiteboard-tool">
                 </button>
@@ -597,5 +597,31 @@
                                id="shareWhiteboardDialogMessage"></p>
                         </div>
                     </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                var currentLocation = window.location;
+
+                var url = currentLocation.href;
+                let paramString = url.split('?')[1];
+                let queryString = new URLSearchParams(paramString);
+                for(let pair of queryString.entries()) {
+                    console.log("Key is:" + pair[0]);
+
+                    if(pair[0]=="readonly")
+                    {
+                        console.log("hidding");
+                        document.getElementById('toolbar').style.visibility = "hidden";
+                    }
+
+
+                }
+
+
+            });
+        </script>
+
 </body>
 </html>
