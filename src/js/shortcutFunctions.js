@@ -22,9 +22,39 @@ const shortcutFunctions = {
         $(".whiteboard-tool[tool=pen]").click();
         whiteboard.redrawMouseCursor();
     }),
+    setTool_penArrow: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penArrow]").click();
+        whiteboard.redrawMouseCursor();
+    }),
+    setTool_penTab: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penTab]").click();
+        whiteboard.redrawMouseCursor();
+    }),
+    setTool_penDotted: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penDotted]").click();
+        whiteboard.redrawMouseCursor();
+    }),
+    setTool_penDotted: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penDottedArrow]").click();
+        whiteboard.redrawMouseCursor();
+    }),
+    setTool_penDotted: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penDottedCircle]").click();
+        whiteboard.redrawMouseCursor();
+    }),
+    setTool_penDotted: defineShortcut(() => {
+        $(".whiteboard-tool[tool=penCircle]").click();
+        whiteboard.redrawMouseCursor();
+    }),
     setTool_line: defineShortcut(() => $(".whiteboard-tool[tool=line]").click()),
+    setTool_arrow: defineShortcut(() => $(".whiteboard-tool[tool=arrow]").click()),
+    setTool_dotted: defineShortcut(() => $(".whiteboard-tool[tool=dotted]").click()),
+    setTool_dottedArrow: defineShortcut(() => $(".whiteboard-tool[tool=dottedArrow]").click()),
+    setTool_arrowTab: defineShortcut(() => $(".whiteboard-tool[tool=arrowTab]").click()),
+    setTool_arrowDootedTab: defineShortcut(() => $(".whiteboard-tool[tool=arrowDootedTab]").click()),
     setTool_rect: defineShortcut(() => $(".whiteboard-tool[tool=rect]").click()),
     setTool_circle: defineShortcut(() => $(".whiteboard-tool[tool=circle]").click()),
+    setTool_circleFixed: defineShortcut(() => $(".whiteboard-tool[tool=circleFixed]").click()),
     setTool_text: defineShortcut(() => $(".whiteboard-tool[tool=text]").click()),
     setTool_eraser: defineShortcut(() => {
         $(".whiteboard-tool[tool=eraser]").click();
