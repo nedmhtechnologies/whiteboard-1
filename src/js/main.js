@@ -287,27 +287,6 @@ function initWhiteboard() {
             .click(function () {
                 whiteboard.redoWhiteboardClick();
             });
-        $("#whiteboardFlipVertical")
-            .click(function () {
-
-                if ($('#whiteboardCanvas').css('transform') == 'none') {
-                    $("#whiteboardCanvas").css({ 'transform': 'rotateX(180deg)' });
-                } else {
-                    $("#whiteboardCanvas").css({ 'transform': 'rotateX(0deg)' });
-                    $("#whiteboardCanvas").css({ 'transform': 'none' });
-                }
-                
-            });
-        $("#whiteboardFlipHorizontal")
-            .click(function () {
-                if ($('#whiteboardCanvas').css('transform') == 'none') {
-                    $("#whiteboardCanvas").css({ 'transform': 'rotateY(180deg)' });
-
-                } else {
-                    $("#whiteboardCanvas").css({ 'transform': 'rotateY(0deg)' });
-                    $("#whiteboardCanvas").css({ 'transform': 'none' });
-                }
-            });
 
         // view only
         $("#whiteboardLockBtn")
@@ -337,7 +316,7 @@ function initWhiteboard() {
                     $(".activeToolIcon").html($(this).html()); //Set Active icon the same as the button icon
                 }
 
-                if (activeTool == "text" || activeTool == "stickynote" || activeTool == "soccerPlayer" || activeTool == "circleWithCross" || activeTool == "CenterCross" || activeTool == "RightCross" || activeTool == "leftCross" ) {
+                if (activeTool == "text" || activeTool == "stickynote") {
                     $("#textboxBackgroundColorPickerBtn").show();
                 } else {
                     $("#textboxBackgroundColorPickerBtn").hide();
@@ -953,7 +932,7 @@ function initWhiteboard() {
                 }
             }
 
-            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote" && whiteboard.tool != "soccerPlayer" && whiteboard.tool != "circleWithCross" && whiteboard.tool != "CenterCross" && whiteboard.tool != "RightCross" && whiteboard.tool != "leftCross") {
+            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote") {
                 showBasicAlert(
                     "Please Drag&Drop the image or pdf into the Whiteboard. (Browsers don't allow copy+past from the filesystem directly)"
                 );

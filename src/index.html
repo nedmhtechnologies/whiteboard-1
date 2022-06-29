@@ -36,43 +36,7 @@
             }
         }
 
-        /* Style The Dropdown Button */
-        .dropbtn {
-            cursor: pointer;
-        }
-
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            z-index: 1;
-        }
-
-            /* Links inside the dropdown */
-            .dropdown-content div {
-                display: block;
-            }
-
-                /* Change color of dropdown links on hover */
-                .dropdown-content div:hover {
-                }
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Change the background color of the dropdown button when the dropdown content is shown */
-        .dropdown:hover .dropbtn {
-        }
     </style>
-
     <body style="display: none">
         <!---Whiteboard container -!-->
         <div id="whiteboardContainer"></div>
@@ -80,124 +44,153 @@
 
         <!---Toolbar -!-->
         <div id="toolbar" style="position: absolute; top: 10px; left: 10px">
-            <!--            <div class="flex-container">-->
+<!--            <div class="flex-container">-->
             <div class="btn-group ">
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-lock.png); background-position: center; background-repeat: no-repeat;"
-                        id="whiteboardLockBtn"
-                        style="background-color: orange"
-                        title="View only"
-                        type="button">
-                    <!--                    <i class="fa fa-lock"></i>-->
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-lock.png); background-position: center; background-repeat: no-repeat;"
+                    id="whiteboardLockBtn"
+                    style="background-color: orange"
+                    title="View only"
+                    type="button"
+                >
+<!--                    <i class="fa fa-lock"></i>-->
                 </button>
                 <img class="" src="" />
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-open-lock.png); background-position: center; background-repeat: no-repeat;"
-                        id="whiteboardUnlockBtn" title="View  and Write" type="button">
-                    <!--                    <i class="fa fa-lock-open"></i>-->
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-open-lock.png); background-position: center; background-repeat: no-repeat;"
+                    id="whiteboardUnlockBtn" title="View  and Write" type="button">
+<!--                    <i class="fa fa-lock-open"></i>-->
                 </button>
                 <img class="" src="" />
             </div>
 
 
             <div class="btn-group whiteboard-edit-group ">
-<!--                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-del.png); background-position: center; background-repeat: no-repeat;"-->
-<!--                        id="whiteboardTrashBtn"-->
-<!--                        title="Clear the whiteboard"-->
-<!--                        type="button">-->
-<!--                </button>-->
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-del.png); background-position: center; background-repeat: no-repeat;"
+                    id="whiteboardTrashBtn"
+                    title="Clear the whiteboard"
+                    type="button">
+
+                </button>
                 <img class="" src="" />
-                <button style="display: none"
-                        id="whiteboardTrashBtnConfirm"
-                        title="Confirm clear..."
-                        type="button">
+                <button
+                    style="display: none"
+                    id="whiteboardTrashBtnConfirm"
+                    title="Confirm clear..."
+                    type="button"
+                >
                     <i class="fa fa-check"></i>
                 </button>
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-undo.png); background-position: center; background-repeat: no-repeat;"
-                        id="whiteboardUndoBtn"
-                        title="Undo your last step"
-                        type="button">
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-undo.png); background-position: center; background-repeat: no-repeat;"
+                    id="whiteboardUndoBtn"
+                    title="Undo your last step"
+                    type="button">
+
                 </button>
                 <img class="" src="" />
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-redo.png); background-position: center; background-repeat: no-repeat;"
-                        id="whiteboardRedoBtn"
-                        title="Redo your last undo"
-                        type="button">
-                </button>
-                <img class="" src="" />
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/Vertical.png); background-position: center; background-repeat: no-repeat;"
-                        id="whiteboardFlipVertical"
-                        title="Flip Vertical"
-                        type="button">
-                </button>
-                <img class="" src="" />
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/Hotizontal.png); background-position: center; background-repeat: no-repeat;"
-                        id="whiteboardFlipHorizontal"
-                        title="Flip Horizontal"
-                        type="button">
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-redo.png); background-position: center; background-repeat: no-repeat;"
+                    id="whiteboardRedoBtn"
+                    title="Redo your last undo"
+                    type="button">
+
                 </button>
                 <img class="" src="" />
             </div>
 
             <div class="btn-group whiteboard-edit-group ">
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-10.png); background-position: center; background-repeat: no-repeat;"
-                        tool="mouse"
-                        title="Take the mouse"
-                        type="button"
-                        class="whiteboard-tool">
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-10.png); background-position: center; background-repeat: no-repeat;"
+                    tool="mouse"
+                    title="Take the mouse"
+                    type="button"
+                    class="whiteboard-tool">
+
                 </button>
                 <img class="" src="" />
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-area.png); background-position: center; background-repeat: no-repeat;"
-                        tool="recSelect"
-                        title="Select an area"
-                        type="button"
-                        class="whiteboard-tool">
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-area.png); background-position: center; background-repeat: no-repeat;"
+                    tool="recSelect"
+                    title="Select an area"
+                    type="button"
+                    class="whiteboard-tool"
+                >
                     <img class="" src="" />
                 </button>
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-01.png); background-position: center; background-repeat: no-repeat;"
+                    tool="pen"
+                    title="Take the pen"
+                    type="button"
+                    class="whiteboard-tool active"
+                >
+                  <img class="" src="" />
 
+                </button>
 
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-a.png); background-position: center; background-repeat: no-repeat;"
+                    tool="line"
+                    title="draw a line"
+                    type="button"
+                    class="whiteboard-tool active"
+                >
+                    <img class="" src="" />
+                </button>
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-rectangle.png); background-position: center; background-repeat: no-repeat;"
+                    tool="rect" title="draw a rectangle" type="button" class="whiteboard-tool">
 
-        </button>
-
-
-
-
-
-
-
-
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-rectangle.png); background-position: center; background-repeat: no-repeat;"
-                        tool="rect" title="draw a rectangle" type="button" class="whiteboard-tool">
                 </button>
                 <img class="" src="" />
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-circl.png); background-position: center; background-repeat: no-repeat;"
+                    tool="circle" title="draw a circle" type="button" class="whiteboard-tool">
 
-                <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-clear.png); background-position: center; background-repeat: no-repeat;"
-                        tool="eraser" title="take the eraser" type="button" class="whiteboard-tool">
+                </button>
+                <img class="" src="" />
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-clear.png); background-position: center; background-repeat: no-repeat;"
+                    tool="eraser" title="take the eraser" type="button" class="whiteboard-tool">
+
                 </button>
                 <img class="" src="" />
             </div>
 
             <div class="btn-group whiteboard-edit-group ">
                 <button style="width: 190px; cursor: default">
-                    <div class="activeToolIcon"
-                         style="position: absolute; top: 2px; left: 2px; font-size: 0.6em">
+                    <div
+                        class="activeToolIcon"
+                        style="position: absolute; top: 2px; left: 2px; font-size: 0.6em"
+                    >
                         <i class="fa fa-pencil-alt"></i>
                     </div>
-                    <img style="
+                    <img
+                        style="
                             position: absolute;
                             left: 11px;
                             top: 16px;
                             height: 14px;
                             width: 130px;
                         "
-                         src="./images/slider-background.svg" />
-                    <input title="Thickness"
-                           id="whiteboardThicknessSlider"
-                           style=" width: 100%;"
-                           type="range"
-                           min="1"
-                           max="3"
-                           value="50" />
-                    <div id="whiteboardColorpicker"
-                         style="
+                        src="./images/slider-background.svg"
+                    />
+                    <input
+                        title="Thickness"
+                        id="whiteboardThicknessSlider"
+                        style="position: absolute; left: 9px; width: 130px; top: 15px"
+                        type="range"
+                        min="1"
+                        max="50"
+                        value="3"
+                    />
+                    <div
+
+                        id="whiteboardColorpicker"
+
+                        style="
                             position: absolute;
                             left: 155px;
                             top: 10px;
@@ -206,252 +199,35 @@
                             border-radius: 3px;
                             border: 1px solid darkgrey;
                         "
-                         data-color="#000000"></div>
+                        data-color="#000000"
+                    ></div>
                 </button>
             </div>
 
+            <div class="btn-group whiteboard-edit-group ">
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-text.png); background-position: center; background-repeat: no-repeat;"
+                    tool="text" title="write text" type="button" class="whiteboard-tool">
 
-
-            <div class="dropdown btn-group whiteboard-edit-group ">
-                <button class="dropbtn" style="padding: 0px; margin: 0px; background-image: url(./images/penDotted.png); background-position: center; background-repeat: no-repeat;"></button>
-                <div class="dropdown-content">
-                    <br />
-                    <br />
-                    <br />
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-01.png); background-position: center; background-repeat: no-repeat;"
-                                tool="pen"
-                                title="Take the pen"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-
-                        </button>
-                    </div>
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/penDotted.png); background-position: center; background-repeat: no-repeat;"
-                                tool="penDotted"
-                                title="Take the Dotted pen"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-
-                        </button>
-                    </div>
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/dottedline.png); background-position: center; background-repeat: no-repeat;"
-                                tool="dotted"
-                                title="Take the Line"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-
-                        </button>
-                    </div>
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/arrowTab_01.png); background-position: center; background-repeat: no-repeat;"
-                                tool="arrowTab"
-                                title="Take the arrorTab"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-
-                        </button>
-                    </div>
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/dottedlineArrow.png); background-position: center; background-repeat: no-repeat;"
-                                tool="dottedArrow"
-                                title="Take the Line"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-
-                        </button>
-                    </div>
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/arrow_01.png); background-position: center; background-repeat: no-repeat;"
-                                tool="arrow"
-                                title="Take the arror"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-
-                        </button>
-                    </div>
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-a.png); background-position: center; background-repeat: no-repeat;"
-                                tool="line"
-                                title="draw a line"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-                        </button>
-                    </div>
-
-
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/polylinearrow.png); background-position: center; background-repeat: no-repeat;"
-                                tool="penArrow"
-                                title="Take the pen"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-                        </button>
-                    </div>
-
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-14.png); background-position: center; background-repeat: no-repeat;"
-                                tool="penTab"
-                                title="Take the pen with tab"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-                        </button>
-                    </div>
-
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/polylinearrowdotted.png); background-position: center; background-repeat: no-repeat;"
-                                tool="penDottedArrow"
-                                title="Take the pen"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-                        </button>
-                    </div>
-
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/polylineCircledotted.png); background-position: center; background-repeat: no-repeat;"
-                                tool="penDottedCircle"
-                                title="Take the pen"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-                        </button>
-                    </div>
-
-                    <div class="btn-group whiteboard-edit-group ">
-                        <button style="padding: 0px; margin: 0px; background-image: url(./images/polylineCircle.png); background-position: center; background-repeat: no-repeat; "
-                                tool="penCircle"
-                                title="Take the pen"
-                                type="button"
-                                class="whiteboard-tool active">
-                            <img class="" src="" />
-                        </button>
-                    </div>
-
-
-                </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div class="dropdown btn-group whiteboard-edit-group ">
-                            <button class="dropbtn" style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-circl.png); background-position: center; background-repeat: no-repeat;"></button>
-                            <div class="dropdown-content">
-                                <br />
-                                <br />
-                                <br />
-                                <div class="btn-group whiteboard-edit-group ">
-
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-circl.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="circle" title="draw a circle" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                                <div class="btn-group whiteboard-edit-group ">
-
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-circl.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="circleFixed" title="draw a Fixed  circle" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                                <div class="btn-group whiteboard-edit-group ">
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/Wheel.svg); background-position: center; background-repeat: no-repeat; "
-                                            tool="circleWithCross" title="circle with cross" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                                <div class="btn-group whiteboard-edit-group ">
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-11.png); background-position: center; background-repeat: no-repeat; "
-                                            tool="Cross" title="Cross" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-
-                                <div class="btn-group whiteboard-edit-group ">
-
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/solidRing.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="circleFilled" title="draw a filled circle" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dropdown btn-group whiteboard-edit-group ">
-                            <button class="dropbtn" style="padding: 0px; margin: 0px; background-image: url(./images/player50.png); background-position: center; background-repeat: no-repeat;"></button>
-                            <div class="dropdown-content">
-                                <br />
-                                <br />
-                                <br />
-                                <div class="btn-group whiteboard-edit-group ">
-
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/CenterCross50.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="CenterCross" title="Center Cross" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-
-                                </div>
-                                <div class="btn-group whiteboard-edit-group ">
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/player50.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="soccerPlayer" title="soccer Player" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                                <div class="btn-group whiteboard-edit-group ">
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/leftCross50.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="leftCross" title="left Cross" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                                <div class="btn-group whiteboard-edit-group ">
-                                    <button style="padding: 0px; margin: 0px; background-image: url(./images/RightCross50.png); background-position: center; background-repeat: no-repeat;"
-                                            tool="RightCross" title="Right Cross" type="button" class="whiteboard-tool">
-                                    </button>
-                                    <img class="" src="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="btn-group whiteboard-edit-group ">
-                            <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-text.png); background-position: center; background-repeat: no-repeat;"
-                                    tool="text" title="write text" type="button" class="whiteboard-tool">
-                            </button>
-                            <img class="" src="" />
-
-
-
-                            <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-sticky.png); background-position: center; background-repeat: no-repeat;"
-                                    tool="stickynote"
-                                    title="place a sticky note"
-                                    type="button"
-                                    class="whiteboard-tool">
-                                <img class="" src="" />
-                            </button>
-                            <button id="textboxBackgroundColorPickerBtn"
-                                    style="display: none"
-                                    title="text background-color">
-                                <div id="textboxBackgroundColorPicker"
-                                     style="
+                </button>
+                <img class="" src="" />
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-sticky.png); background-position: center; background-repeat: no-repeat;"
+                    tool="stickynote"
+                    title="place a sticky note"
+                    type="button"
+                    class="whiteboard-tool"
+                >
+                    <img class="" src="" />
+                </button>
+                <button
+                    id="textboxBackgroundColorPickerBtn"
+                    style="display: none"
+                    title="text background-color"
+                >
+                    <div
+                        id="textboxBackgroundColorPicker"
+                        style="
                             width: 26px;
                             height: 23px;
                             border-radius: 3px;
@@ -460,171 +236,175 @@
                             top: -2px;
                             position: relative;
                         "
-                                     data-color="#f5f587"></div>
-                            </button>
-                        </div>
+                        data-color="#f5f587"
+                    ></div>
+                </button>
+            </div>
 
-                        <div class="btn-group whiteboard-edit-group ">
-                            <!--                <button-->
-                            <!--                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-image.png); background-position: center; background-repeat: no-repeat;"-->
-                            <!--                    id="addImgToCanvasBtn" title="Upload Image to whiteboard" type="button">-->
-                            <!--                    <i-->
-                            <!--                        style="-->
-                            <!--                            position: absolute;-->
-                            <!--                            top: 3px;-->
-                            <!--                            left: 2px;-->
-                            <!--                            color: #000000;-->
-                            <!--                            font-size: 0.5em;-->
-                            <!--                        "-->
-                            <!--                        class="fas fa-upload"-->
-                            <!--                    ></i>-->
-                            <!--                </button>-->
+            <div class="btn-group whiteboard-edit-group ">
+<!--                <button-->
+<!--                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-image.png); background-position: center; background-repeat: no-repeat;"-->
+<!--                    id="addImgToCanvasBtn" title="Upload Image to whiteboard" type="button">-->
 
-<!--                            <button  style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-upload-file.png); background-position: center; background-repeat: no-repeat;"-->
-<!--                                    style="position: relative"-->
-<!--                                    id="uploadJsonBtn"-->
-<!--                                    title="Load saved JSON to whiteboard"-->
-<!--                                    type="button">-->
-
-
-<!--                                <i style="-->
+<!--                    <i-->
+<!--                        style="-->
 <!--                            position: absolute;-->
 <!--                            top: 3px;-->
 <!--                            left: 2px;-->
 <!--                            color: #000000;-->
 <!--                            font-size: 0.5em;-->
 <!--                        "-->
-<!--                                   class="fas fa-upload"></i>-->
-<!--                            </button>-->
-<!--                            <img class="" src="" />-->
-<!--                            <input style="display: none" id="myFile" type="file" />-->
+<!--                        class="fas fa-upload"-->
+<!--                    ></i>-->
+<!--                </button>-->
+
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-upload-file.png); background-position: center; background-repeat: no-repeat;"
+                    style="position: relative"
+                    id="uploadJsonBtn"
+                    title="Load saved JSON to whiteboard"
+                    type="button"
+                >
 
 
-                        </div>
-
-                        <div class="btn-group ">
-                            <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-img.png); background-position: center; background-repeat: no-repeat;"
-                                    id="saveAsImageBtn" title="Save whiteboard as image" type="button">
-
-                                <i style="
+                    <i
+                        style="
                             position: absolute;
                             top: 3px;
                             left: 2px;
                             color: #000000;
                             font-size: 0.5em;
                         "
-                                   class="fas fa-save"></i>
-                            </button>
+                        class="fas fa-upload"
+                    ></i>
+                </button>
+                <img class="" src="" />
+                <input style="display: none" id="myFile" type="file" />
+            </div>
 
-                            <img class="" src="" />
-                            <button style="position: relative; display: none"
-                                    id="uploadWebDavBtn"
-                                    title="Save whiteboard to webdav"
-                                    type="button">
-                                <i class="fas fa-globe"></i>
-                                <i style="
+            <div class="btn-group ">
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-img.png); background-position: center; background-repeat: no-repeat;"
+                    id="saveAsImageBtn" title="Save whiteboard as image" type="button">
+
+                    <i
+                        style="
                             position: absolute;
                             top: 3px;
                             left: 2px;
                             color: #000000;
                             font-size: 0.5em;
                         "
-                                   class="fas fa-save"></i>
-                            </button>
-<!--                            <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-file.png); background-position: center; background-repeat: no-repeat;"-->
-<!--                                    style="position: relative"-->
-<!--                                    id="saveAsJSONBtn"-->
-<!--                                    title="Save whiteboard as JSON"-->
-<!--                                    type="button">-->
+                        class="fas fa-save"
+                    ></i>
+                </button>
 
-<!--                                <i style="-->
-<!--                            position: absolute;-->
-<!--                            top: 3px;-->
-<!--                            left: 2px;-->
-<!--                            color: #000000;-->
-<!--                            font-size: 0.5em;-->
-<!--                        "-->
-<!--                                   class="fas fa-save"></i>-->
-<!--                            </button>-->
-                            <img class="" src="" />
-                            <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-sharee.png); background-position: center; background-repeat: no-repeat;"
-                                    id="shareWhiteboardBtn" title="share whiteboard" type="button">
-                            </button>
-                            <img class="" src="" />
-                            <button style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-info.png); background-position: center; background-repeat: no-repeat;"
-                                    id="displayWhiteboardInfoBtn" title="Show whiteboard info" type="button">
-                                <!--                    <i class="fas fa-info-circle"></i>-->
-                            </button>
-                            <img class="" src="" />
-                        </div>
-                        <!--            </div>-->
-                        <div class="btn-group minGroup">
-                            <button style="width: 100%; padding: 11px 11px"
-                                    id="minMaxBtn"
-                                    title="hide buttons"
-                                    type="button">
-                                <i id="minBtn"
-                                   style="position: relative; left: -5px"
-                                   class="fas fa-angle-left"></i>
-                                <i id="maxBtn"
-                                   style="position: relative; left: -5px; display: none"
-                                   class="fas fa-angle-right"></i>
-                            </button>
-                        </div>
+                <img class="" src="" />
+                <button
+                    style="position: relative; display: none"
+                    id="uploadWebDavBtn"
+                    title="Save whiteboard to webdav"
+                    type="button"
+                >
+                    <i class="fas fa-globe"></i>
+                    <i
+                        style="
+                            position: absolute;
+                            top: 3px;
+                            left: 2px;
+                            color: #000000;
+                            font-size: 0.5em;
+                        "
+                        class="fas fa-save"
+                    ></i>
+                </button>
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-file.png); background-position: center; background-repeat: no-repeat;"
+                    style="position: relative"
+                    id="saveAsJSONBtn"
+                    title="Save whiteboard as JSON"
+                    type="button"
+                >
 
+                    <i
+                        style="
+                            position: absolute;
+                            top: 3px;
+                            left: 2px;
+                            color: #000000;
+                            font-size: 0.5em;
+                        "
+                        class="fas fa-save"
+                    ></i>
+                </button>
+                <img class="" src="" />
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-sharee.png); background-position: center; background-repeat: no-repeat;"
+                    id="shareWhiteboardBtn" title="share whiteboard" type="button">
 
-                    </div>
-
-                    <div id="whiteboardInfoContainer">
-                        <p><b>Whiteboard information:</b></p>
-                        <p># connected users: <i id="connectedUsersCount">0</i></p>
-<!--                        <p>Smallest screen resolution: <i id="smallestScreenResolution">Unknown.</i></p>-->
-<!--                        <p># msg. sent to server: <i id="messageSentCount">0</i></p>-->
-<!--                        <p># msg. received from server: <i id="messageReceivedCount">0</i></p>-->
-                    </div>
-
-                    <div id="shareWhiteboardDialog" class="displayNone">
-                        <div class="shareWhiteboardDialogContent">
-                            <button class="shareWhiteboardDialogItem"
-                                    id="shareWhiteboardDialogCopyReadOnlyLink">
-                                <i class="fa fa-lock"></i>&nbsp;Share read-only link
-                            </button>
-                            <button class="shareWhiteboardDialogItem displayNone"
-                                    id="shareWhiteboardDialogCopyReadWriteLink">
-                                <i class="fa fa-lock-open"></i>&nbsp;Share read/write link
-                            </button>
-                            <button class="shareWhiteboardDialogItem" id="shareWhiteboardDialogGoBack">
-                                <b>Go back to the whiteboard</b>
-                            </button>
-                            <p class="shareWhiteboardDialogItem displayNone"
-                               id="shareWhiteboardDialogMessage"></p>
-                        </div>
-                    </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-
-                var currentLocation = window.location;
-
-                var url = currentLocation.href;
-                let paramString = url.split('?')[1];
-                let queryString = new URLSearchParams(paramString);
-                for(let pair of queryString.entries()) {
-                    console.log("Key is:" + pair[0]);
-
-                    if(pair[0]=="readonly")
-                    {
-                        console.log("hidding");
-                        document.getElementById('toolbar').style.visibility = "hidden";
-                    }
+                </button>
+                <img class="" src="" />
+                <button
+                    style="padding: 0px; margin: 0px; background-image: url(./images/wb_icons-info.png); background-position: center; background-repeat: no-repeat;"
+                    id="displayWhiteboardInfoBtn" title="Show whiteboard info" type="button">
+<!--                    <i class="fas fa-info-circle"></i>-->
+                </button>
+                <img class="" src="" />
+            </div>
+<!--            </div>-->
+            <div class="btn-group minGroup">
+                <button
+                    style="width: 100%; padding: 11px 11px"
+                    id="minMaxBtn"
+                    title="hide buttons"
+                    type="button"
+                >
+                    <i
+                        id="minBtn"
+                        style="position: relative; left: -5px"
+                        class="fas fa-angle-left"
+                    ></i>
+                    <i
+                        id="maxBtn"
+                        style="position: relative; left: -5px; display: none"
+                        class="fas fa-angle-right"
+                    ></i>
+                </button>
+            </div>
 
 
-                }
+        </div>
 
+        <div id="whiteboardInfoContainer">
+            <p><b>Whiteboard information:</b></p>
+            <p># connected users: <i id="connectedUsersCount">0</i></p>
+            <p>Smallest screen resolution: <i id="smallestScreenResolution">Unknown.</i></p>
+            <p># msg. sent to server: <i id="messageSentCount">0</i></p>
+            <p># msg. received from server: <i id="messageReceivedCount">0</i></p>
+        </div>
 
-            });
-        </script>
-
-</body>
+        <div id="shareWhiteboardDialog" class="displayNone">
+            <div class="shareWhiteboardDialogContent">
+                <button
+                    class="shareWhiteboardDialogItem"
+                    id="shareWhiteboardDialogCopyReadOnlyLink"
+                >
+                    <i class="fa fa-lock"></i>&nbsp;Share read-only link
+                </button>
+                <button
+                    class="shareWhiteboardDialogItem displayNone"
+                    id="shareWhiteboardDialogCopyReadWriteLink"
+                >
+                    <i class="fa fa-lock-open"></i>&nbsp;Share read/write link
+                </button>
+                <button class="shareWhiteboardDialogItem" id="shareWhiteboardDialogGoBack">
+                    <b>Go back to the whiteboard</b>
+                </button>
+                <p
+                    class="shareWhiteboardDialogItem displayNone"
+                    id="shareWhiteboardDialogMessage"
+                ></p>
+            </div>
+        </div>
+    </body>
 </html>
