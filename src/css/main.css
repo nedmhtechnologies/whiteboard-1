@@ -21,8 +21,8 @@ body {
 }
 
 .btn-group button {
-    background: transparent;
-    border: 2px solid #636060;
+    background-color: white;
+
     margin: -1px;
     /* Green border */
     color: black;
@@ -66,13 +66,7 @@ button::-moz-focus-inner {
 }
 
 .whiteboard-edit-group.group-disabled {
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(255, 166, 0, 0.366),
-        rgba(255, 166, 0, 0.366) 10px,
-        rgba(255, 166, 0, 0.666) 10px,
-        rgba(255, 166, 0, 0.666) 20px
-    );
+    background-color: transparent;
 }
 
 /*
@@ -89,12 +83,13 @@ button::-moz-focus-inner {
     content: "";
     clear: both;
     display: table;
+    background-color: white;
 }
 
 /* Add a background color on hover */
 
 .btn-group button:hover {
-    background-color: #9a9a9a;
+    background-color: white;
 }
 
 button {
@@ -102,7 +97,7 @@ button {
 }
 
 .btn-group {
-    background-color: #808080ab;
+    background-color: white;
     margin-left: 5px;
     margin-bottom: 5px;
     float: left;
