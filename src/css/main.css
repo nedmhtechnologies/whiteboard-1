@@ -98,8 +98,6 @@ button {
 
 .btn-group {
     background-color: white;
-    margin-left: 5px;
-    margin-bottom: 5px;
     float: left;
     position: relative;
 }
