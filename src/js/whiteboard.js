@@ -14,7 +14,7 @@ const _45_DEG_IN_RAD = 45 * DEG_TO_RAD;
 const whiteboard = {
     canvas: null,
     ctx: null,
-    drawcolor: "black",
+    drawcolor: "Green",
     previousToolHtmlElem: null, // useful for handling read-only mode
     tool: "mouse",
     thickness: 4,
@@ -174,7 +174,7 @@ const whiteboard = {
             _this.drawFlag = true;
 
             const currentPos = Point.fromEvent(e);
-  
+
             if (_this.tool === "pen") {
                 _this.penSmoothLastCoords = [
                     currentPos.x,
@@ -718,7 +718,7 @@ const whiteboard = {
                     c: _this.drawcolor,
                     th: _this.thickness,
                 });
-              
+
 
 
 
@@ -1059,8 +1059,8 @@ const whiteboard = {
             const currentPos = Point.fromEvent(e);
             const fontsize = _this.thickness * 0.5;
             const txId = "tx" + +new Date();
-           // const isStickyNote = _this.tool === "stickynote";
-            const isStickyNote = _this.tool;
+           const isStickyNote = _this.tool === "stickynote";
+           //  const isStickyNote = _this.tool;
             const newLocalBox = false;
             _this.sendFunction({
                 t: "addTextBox",
@@ -1748,7 +1748,7 @@ const whiteboard = {
         _this.ctx.moveTo(0, 0);
         _this.ctx.lineTo(length, 0);
 
-        // move tab code here 
+        // move tab code here
 
         if (arrowStart) {
             _this.ctx.moveTo(-aLength, -aWidth);
@@ -1825,7 +1825,7 @@ const whiteboard = {
         _this.ctx.stroke();
         _this.ctx.closePath();
 
-       
+
         var dx = toX - fromX;
         var dy = toY - fromY;
         var angle = Math.atan2(dy, dx);
@@ -1835,7 +1835,7 @@ const whiteboard = {
         _this.ctx.beginPath();
         _this.ctx.moveTo(0, 0);
         _this.ctx.lineTo(length, 0);
-        
+
         if (arrowStart) {
             _this.ctx.setLineDash([0, 0]);
             _this.ctx.moveTo(-aLength, -aWidth);
@@ -1851,7 +1851,7 @@ const whiteboard = {
             _this.ctx.setLineDash([5, 5]);
         }
         _this.ctx.stroke();
-       
+
         _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         _this.ctx.closePath();
 
@@ -1900,7 +1900,7 @@ const whiteboard = {
         var steps = Math.ceil(length / 5);
         _this.ctx.beginPath();
         _this.ctx.moveTo(x0, y0);
-      
+
         if (steps == 0) {
             _this.ctx.lineTo(x0, y0);
         }
@@ -2564,7 +2564,7 @@ const whiteboard = {
                 "</div>"
             );
         }
-        else if (isStickyNote == "soccerPlayer") {           
+        else if (isStickyNote == "soccerPlayer") {
             textBox = $(
                 '<div id="' +
                 txId +
