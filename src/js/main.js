@@ -339,12 +339,10 @@ function initWhiteboard() {
 
                 if (activeTool == "text" || activeTool == "stickynote" || activeTool == "soccerPlayer" || activeTool == "circleWithCross" || activeTool == "CenterCross" || activeTool == "RightCross" || activeTool == "leftCross" ) {
                     $("#textboxBackgroundColorPickerBtn").show();
-                } else {
+                } else if(activeTool == "stickynote") {
                     $("#textboxBackgroundColorPickerBtn").hide();
                 }
-                if (activeTool == "stickynote"){
-                    $("#textboxBackgroundColorPickerBtn").hide();
-                }
+
 
             });
 
