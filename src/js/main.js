@@ -296,7 +296,7 @@ function initWhiteboard() {
                     $("#whiteboardCanvas").css({ 'transform': 'rotateX(0deg)' });
                     $("#whiteboardCanvas").css({ 'transform': 'none' });
                 }
-                
+
             });
         $("#whiteboardFlipHorizontal")
             .click(function () {
@@ -342,6 +342,10 @@ function initWhiteboard() {
                 } else {
                     $("#textboxBackgroundColorPickerBtn").hide();
                 }
+                if (activeTool == "stickynote"){
+                    $("#textboxBackgroundColorPickerBtn").hide();
+                }
+
             });
 
         // upload image button
