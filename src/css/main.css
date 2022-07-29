@@ -104,6 +104,9 @@ button {
 
 .whiteboard-tool.active:not(:disabled) {
     background: var(--selected-icon-bg-color);
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+
 }
 
 #whiteboardThicknessSlider {
