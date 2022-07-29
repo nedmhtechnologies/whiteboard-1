@@ -2531,23 +2531,23 @@ whiteboard = {
             );
         } else if (isStickyNote == "leftCross") {
             textBox = $(
-                '<div style="filter: grayscale(100%); -webkit-filter: grayscale(100%);" id="' +
+                '<div id="' +
                 txId +
                 '" class="hotqcontent ' +
                 cssclass +
-                '" style="font-family: Monospace; position:absolute; filter: grayscale(100%); -webkit-filter: grayscale(100%); top:' +
+                '" style="font-family: Monospace; position:absolute; top:' +
                 top +
                 "px; left:" +
                 left +
                 "px;" +
                 ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="filter: grayscale(100%); -webkit-filter: grayscale(100%); outline: none; font-size:' +
+                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
                 fontsize +
                 "em; color:" +
                 textcolor +
-                '; min-width:50px; min-height:50px;"><img src="./images/leftCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
-                '<div title="remove textbox" class="removeIcon nested" style="filter: grayscale(100%); -webkit-filter: grayscale(100%); position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon nested" style="filter: grayscale(100%); -webkit-filter: grayscale(100%); position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                '; min-width:50px; min-height:50px"><img src="" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
+                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
 
                 "</div>"
             );
@@ -2567,8 +2567,8 @@ whiteboard = {
                 fontsize +
                 "em; color:" +
                 textcolor +
-                '; min-width:50px; min-height:50px"><img src="./images/RightCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
-                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                '; min-width:50px; min-height:50px"><img src="" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
+                '<div title="removesds textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
                 '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
 
                 "</div>"
