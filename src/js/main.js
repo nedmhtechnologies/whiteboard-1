@@ -287,22 +287,27 @@ function initWhiteboard() {
             .click(function () {
                 whiteboard.redoWhiteboardClick();
             });
-        $("#whiteboardFlipVertical").click(function () {
-            if ($("#whiteboardCanvas").css("transform") == "none") {
-                $("#whiteboardCanvas").css({ transform: "rotateX(180deg)" });
-            } else {
-                $("#whiteboardCanvas").css({ transform: "rotateX(0deg)" });
-                $("#whiteboardCanvas").css({ transform: "none" });
-            }
-        });
-        $("#whiteboardFlipHorizontal").click(function () {
-            if ($("#whiteboardCanvas").css("transform") == "none") {
-                $("#whiteboardCanvas").css({ transform: "rotateY(180deg)" });
-            } else {
-                $("#whiteboardCanvas").css({ transform: "rotateY(0deg)" });
-                $("#whiteboardCanvas").css({ transform: "none" });
-            }
-        });
+        $("#whiteboardFlipVertical")
+            .click(function () {
+
+                if ($('#whiteboardCanvas').css('transform') == 'none') {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateX(180deg)' });
+                } else {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateX(0deg)' });
+                    $("#whiteboardCanvas").css({ 'transform': 'none' });
+                }
+
+            });
+        $("#whiteboardFlipHorizontal")
+            .click(function () {
+                if ($('#whiteboardCanvas').css('transform') == 'none') {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateY(180deg)' });
+
+                } else {
+                    $("#whiteboardCanvas").css({ 'transform': 'rotateY(0deg)' });
+                    $("#whiteboardCanvas").css({ 'transform': 'none' });
+                }
+            });
 
         // view only
         $("#whiteboardLockBtn")
@@ -332,19 +337,13 @@ function initWhiteboard() {
                     $(".activeToolIcon").html($(this).html()); //Set Active icon the same as the button icon
                 }
 
-                if (
-                    activeTool == "text" ||
-                    activeTool == "stickynote" ||
-                    activeTool == "soccerPlayer" ||
-                    activeTool == "circleWithCross" ||
-                    activeTool == "CenterCross" ||
-                    activeTool == "RightCross" ||
-                    activeTool == "leftCross"
-                ) {
+                if (activeTool == "text" || activeTool == "stickynote" || activeTool == "soccerPlayer" || activeTool == "circleWithCross" || activeTool == "CenterCross" || activeTool == "RightCross" || activeTool == "leftCross" ) {
                     $("#textboxBackgroundColorPickerBtn").show();
-                } else if (activeTool == "stickynote") {
+                } else if(activeTool == "stickynote") {
                     $("#textboxBackgroundColorPickerBtn").hide();
                 }
+
+
             });
 
         // upload image button
@@ -591,7 +590,6 @@ function initWhiteboard() {
         // load json to whiteboard
         $("#myFile").on("change", function () {
             var file = document.getElementById("myFile").files[0];
-
             var reader = new FileReader();
             reader.onload = function (e) {
                 try {
@@ -603,25 +601,6 @@ function initWhiteboard() {
             };
             reader.readAsText(file);
             $(this).val("");
-        });
-
-        window.addEventListener("message", (event) => {
-            // IMPORTANT: check the origin of the data!
-            if (event.origin.startsWith("http://127.0.0.1:8000")) {
-                try {
-                    var j = event.data;
-                    whiteboard.loadJsonData(j);
-                } catch (e) {
-                    showBasicAlert("File was not a valid JSON!");
-                }
-
-                // alert(event.data);
-            } else {
-                // The data was NOT sent from your site!
-                // Be careful! Do not use it. This else branch is
-                // here just for clarity, you usually shouldn't need it.
-                return 69;
-            }
         });
 
         // On thickness slider change
@@ -976,16 +955,7 @@ function initWhiteboard() {
                 }
             }
 
-            if (
-                !imgItemFound &&
-                whiteboard.tool != "text" &&
-                whiteboard.tool != "stickynote" &&
-                whiteboard.tool != "soccerPlayer" &&
-                whiteboard.tool != "circleWithCross" &&
-                whiteboard.tool != "CenterCross" &&
-                whiteboard.tool != "RightCross" &&
-                whiteboard.tool != "leftCross"
-            ) {
+            if (!imgItemFound && whiteboard.tool != "text" && whiteboard.tool != "stickynote" && whiteboard.tool != "soccerPlayer" && whiteboard.tool != "circleWithCross" && whiteboard.tool != "CenterCross" && whiteboard.tool != "RightCross" && whiteboard.tool != "leftCross") {
                 showBasicAlert(
                     "Please Drag&Drop the image or pdf into the Whiteboard. (Browsers don't allow copy+past from the filesystem directly)"
                 );
