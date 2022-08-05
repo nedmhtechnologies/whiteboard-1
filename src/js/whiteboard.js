@@ -2545,7 +2545,7 @@ whiteboard = {
                 fontsize +
                 "em; color:" +
                 textcolor +
-                '; min-width:50px; min-height:50px"><img src="" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
+                '; min-width:50px; min-height:50px"><img src="./images/leftCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
                 '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
                 '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
 
@@ -2567,8 +2567,8 @@ whiteboard = {
                 fontsize +
                 "em; color:" +
                 textcolor +
-                '; min-width:50px; min-height:50px"><img src="" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
-                '<div title="removesds textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                '; min-width:50px; min-height:50px"><img src="./images/RightCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
+                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
                 '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
 
                 "</div>"
