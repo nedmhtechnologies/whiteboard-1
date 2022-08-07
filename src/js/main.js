@@ -611,7 +611,11 @@ function initWhiteboard() {
                     var j = event.data;
                     console.clear();
                     $(document).ready(function () {
-                        whiteboard.loadJsonData(j);
+                        sleep(500).then(() => {
+                            console.log("setting up file...");
+                            console.log(j);
+                            whiteboard.loadJsonData(j);
+                        });
                     });
                 } catch (e) {
                     showBasicAlert("File was not a valid JSON!");
@@ -625,6 +629,10 @@ function initWhiteboard() {
                 return 69;
             }
         });
+
+        function sleep(time) {
+            return new Promise((resolve) => setTimeout(resolve, time));
+        }
 
         // On thickness slider change
         $("#whiteboardThicknessSlider").on("input", function () {
