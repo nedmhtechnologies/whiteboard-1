@@ -11,11 +11,10 @@ const RAD_TO_DEG = 180.0 / Math.PI;
 const DEG_TO_RAD = Math.PI / 180.0;
 const _45_DEG_IN_RAD = 45 * DEG_TO_RAD;
 
-let whiteboard;
-whiteboard = {
+const whiteboard = {
     canvas: null,
     ctx: null,
-    drawcolor: "Green",
+    drawcolor: "black",
     previousToolHtmlElem: null, // useful for handling read-only mode
     tool: "mouse",
     thickness: 4,
@@ -97,9 +96,7 @@ whiteboard = {
             '<canvas id="whiteboardCanvas" style="position: absolute; left:0px; top:0; cursor:crosshair;" width="100%" height="100%"></canvas>'
         );
         // SVG container holding drawing or moving previews
-        _this.svgContainer = $(
-            '<svg style="position: absolute; top:0px; left:0px;" ></svg>'
-        );
+        _this.svgContainer = $('<svg style="position: absolute; top:0px; left:0px;" ></svg>');
         // drag and drop indicator, hidden by default
         _this.dropIndicator = $(
             '<div style="position:absolute; height: 100%; width: 100%; border: 7px dashed gray; text-align: center; top: 0px; left: 0px; color: gray; font-size: 23em; display: none;"><i class="far fa-plus-square" aria-hidden="true"></i></div>'
@@ -142,22 +139,33 @@ whiteboard = {
 
         this.oldGCO = this.ctx.globalCompositeOperation;
 
-
         window.addEventListener("resize", function () {
             // Handle resize
             const dbCp = JSON.parse(JSON.stringify(_this.drawBuffer)); // Copy the buffer
             /* _this.canvas.width = $(window).width();
-             _this.canvas.height = $(window).height(); // Set new canvas height
-             _this.drawBuffer = [];
-             _this.textContainer.empty();
-             _this.loadData(dbCp); // draw old content in*/
+            _this.canvas.height = $(window).height(); // Set new canvas height
+            _this.drawBuffer = [];
+            _this.textContainer.empty();
+            _this.loadData(dbCp); // draw old content in*/
 
-            $("#whiteboardCanvas").outerHeight($(window).height() - $("#whiteboardCanvas").offset().top - Math.abs($("#whiteboardCanvas").outerHeight(true) - $("#whiteboardCanvas").outerHeight()));
+            $("#whiteboardCanvas").outerHeight(
+                $(window).height() -
+                    $("#whiteboardCanvas").offset().top -
+                    Math.abs(
+                        $("#whiteboardCanvas").outerHeight(true) -
+                            $("#whiteboardCanvas").outerHeight()
+                    )
+            );
             $(window).on("resize", function () {
-                $("#whiteboardCanvas").outerHeight($(window).height() - $("#whiteboardCanvas").offset().top - Math.abs($("#whiteboardCanvas").outerHeight(true) - $("#whiteboardCanvas").outerHeight()));
+                $("#whiteboardCanvas").outerHeight(
+                    $(window).height() -
+                        $("#whiteboardCanvas").offset().top -
+                        Math.abs(
+                            $("#whiteboardCanvas").outerHeight(true) -
+                                $("#whiteboardCanvas").outerHeight()
+                        )
+                );
             });
-
-
         });
 
         $(_this.mouseOverlay).on("mousedown touchstart", function (e) {
@@ -260,7 +268,6 @@ whiteboard = {
                 _this.svgLine.setAttribute("x2", currentPos.x);
                 _this.svgLine.setAttribute("y2", currentPos.y);
                 _this.svgContainer.append(_this.svgLine);
-
             } else if (_this.tool === "dotted") {
                 _this.startCoords = currentPos;
                 _this.svgDottedLine = document.createElementNS(svgns, "dotted");
@@ -271,7 +278,6 @@ whiteboard = {
                 _this.svgDottedLine.setAttribute("x2", currentPos.x);
                 _this.svgDottedLine.setAttribute("y2", currentPos.y);
                 _this.svgContainer.append(_this.svgDottedLine);
-
             } else if (_this.tool === "dottedArrow") {
                 _this.startCoords = currentPos;
                 _this.svgDottedLineArrow = document.createElementNS(svgns, "dottedArrow");
@@ -282,7 +288,6 @@ whiteboard = {
                 _this.svgDottedLineArrow.setAttribute("x2", currentPos.x);
                 _this.svgDottedLineArrow.setAttribute("y2", currentPos.y);
                 _this.svgContainer.append(_this.svgDottedLineArrow);
-
             } else if (_this.tool === "arrow") {
                 _this.startCoords = currentPos;
                 _this.svgArrow = document.createElementNS(svgns, "arrow");
@@ -431,7 +436,6 @@ whiteboard = {
                 _this.svgContainer.find("line").remove();
             }
 
-
             if (_this.tool === "lineDotted") {
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -452,8 +456,6 @@ whiteboard = {
                 });
                 _this.svgContainer.find("lineDotted").remove();
             } else if (_this.tool === "dotted") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -478,14 +480,10 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("dotted").remove();
             } else if (_this.tool === "dottedArrow") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -513,12 +511,9 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
                 _this.svgContainer.find("dottedArrow").remove();
             } else if (_this.tool === "arrow") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -545,14 +540,10 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("arrow").remove();
             } else if (_this.tool === "penArrow") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -579,14 +570,10 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("penArrow").remove();
             } else if (_this.tool === "penTab") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -613,14 +600,10 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("penTab").remove();
             } else if (_this.tool === "penDottedArrow") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -647,14 +630,10 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("penDottedArrow").remove();
             } else if (_this.tool === "penDottedCircle") {
-
-
                 const r = 1;
                 if (_this.thickness < 0) {
                     r = 10;
@@ -672,12 +651,9 @@ whiteboard = {
                     c: _this.drawcolor,
                     th: _this.thickness,
                 });
-
 
                 _this.svgContainer.find("penDottedCircle").remove();
             } else if (_this.tool === "penCircle") {
-
-
                 const r = 1;
                 if (_this.thickness < 0) {
                     r = 10;
@@ -696,11 +672,8 @@ whiteboard = {
                     th: _this.thickness,
                 });
 
-
                 _this.svgContainer.find("penCircle").remove();
             } else if (_this.tool === "arrowTab") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -727,14 +700,10 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("arrowTab").remove();
             } else if (_this.tool === "arrowDootedTab") {
-
-
                 /*        (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd)*/
                 if (_this.pressedKeys.shift) {
                     currentPos = _this.getRoundedAngles(currentPos);
@@ -761,9 +730,7 @@ whiteboard = {
                     //aLength: _this.aLength,
                     //arrowStart: _this.arrowStart,
                     //arrowEnd: _this.arrowEnd,
-
                 });
-
 
                 _this.svgContainer.find("arrowDootedTab").remove();
             } else if (_this.tool === "pen") {
@@ -798,7 +765,7 @@ whiteboard = {
                 if (_this.pressedKeys.shift) {
                     if (
                         (currentPos.x - _this.startCoords.x) *
-                        (currentPos.y - _this.startCoords.y) >
+                            (currentPos.y - _this.startCoords.y) >
                         0
                     ) {
                         currentPos = new Point(
@@ -880,7 +847,7 @@ whiteboard = {
                 if (_this.pressedKeys.shift) {
                     if (
                         (currentPos.x - _this.startCoords.x) *
-                        (currentPos.y - _this.startCoords.y) >
+                            (currentPos.y - _this.startCoords.y) >
                         0
                     ) {
                         currentPos = new Point(
@@ -900,7 +867,7 @@ whiteboard = {
                 const left =
                     _this.startCoords.x < currentPos.x ? _this.startCoords.x : currentPos.x;
                 const top = _this.startCoords.y < currentPos.y ? _this.startCoords.y : currentPos.y;
-                _this.mouseOverlay.css({cursor: "default"});
+                _this.mouseOverlay.css({ cursor: "default" });
                 const imgDiv = $(
                     `<div class="dragMe" style="position:absolute; left: ${left}px; top: ${top}px; width: ${width}px; border: 2px dotted gray; overflow: hidden; height: ${height}px;" cursor:move;">
                     <canvas style="cursor:move; position:absolute; top:0px; left:0px;" width="${width}" height="${height}"></canvas>
@@ -976,8 +943,8 @@ whiteboard = {
             const currentPos = Point.fromEvent(e);
             const fontsize = _this.thickness * 0.5;
             const txId = "tx" + +new Date();
-            const isStickyNote = _this.tool === "stickynote";
-            //  const isStickyNote = _this.tool;
+            // const isStickyNote = _this.tool === "stickynote";
+            const isStickyNote = _this.tool;
             const newLocalBox = false;
             _this.sendFunction({
                 t: "addTextBox",
@@ -1000,7 +967,7 @@ whiteboard = {
                 currentPos.y,
                 txId,
                 isStickyNote,
-                true,
+                true
             );
         });
     },
@@ -1010,7 +977,7 @@ whiteboard = {
      * @returns {Point}
      */
     getRoundedAngles: function (currentPos) {
-        const {startCoords} = this;
+        const { startCoords } = this;
 
         // these transformations operate in the standard coordinate system
         // y goes from bottom to up, x goes left to right
@@ -1072,35 +1039,35 @@ whiteboard = {
             if (_this.tool === "eraser") {
                 const left = currentPos.x - _this.thickness;
                 const top = currentPos.y - _this.thickness;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "pen") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "penArrow") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "penTab") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "penDotted") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "penDottedArrow") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "penDottedCircle") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "penCircle") {
                 const left = currentPos.x - _this.thickness / 2;
                 const top = currentPos.y - _this.thickness / 2;
-                if (_this.ownCursor) _this.ownCursor.css({top: top + "px", left: left + "px"});
+                if (_this.ownCursor) _this.ownCursor.css({ top: top + "px", left: left + "px" });
             } else if (_this.tool === "line") {
                 if (_this.svgLine) {
                     let posToUse = currentPos;
@@ -1225,15 +1192,24 @@ whiteboard = {
                 color = "#00000000";
                 widthHeight = widthHeight * 2;
             }
-            if (_this.tool === "eraser" || _this.tool === "pen" || _this.tool === "penDotted" || _this.tool === "penArrow" || _this.tool === "penTab" || _this.tool === "penDottedArrow" || _this.tool === "penDottedCircle" || _this.tool === "penCircle") {
+            if (
+                _this.tool === "eraser" ||
+                _this.tool === "pen" ||
+                _this.tool === "penDotted" ||
+                _this.tool === "penArrow" ||
+                _this.tool === "penTab" ||
+                _this.tool === "penDottedArrow" ||
+                _this.tool === "penDottedCircle" ||
+                _this.tool === "penCircle"
+            ) {
                 _this.ownCursor = $(
                     '<div id="ownCursor" style="background:' +
-                    color +
-                    "; border:1px solid gray; position:absolute; width:" +
-                    widthHeight +
-                    "px; height:" +
-                    widthHeight +
-                    'px; border-radius:50%;"></div>'
+                        color +
+                        "; border:1px solid gray; position:absolute; width:" +
+                        widthHeight +
+                        "px; height:" +
+                        widthHeight +
+                        'px; border-radius:50%;"></div>'
                 );
                 _this.cursorContainer.append(_this.ownCursor);
             }
@@ -1259,13 +1235,13 @@ whiteboard = {
         _this.svgContainer.find("circle").remove();
         _this.svgContainer.find("circleFixed").remove();
         _this.svgContainer.find("circleFilled").remove();
-        _this.sendFunction({t: "cursor", event: "out"});
+        _this.sendFunction({ t: "cursor", event: "out" });
     },
     redrawMouseCursor: function () {
         const _this = this;
         _this.triggerMouseOut();
         _this.triggerMouseOver();
-        _this.triggerMouseMove({offsetX: _this.prevPos.x, offsetY: _this.prevPos.y});
+        _this.triggerMouseMove({ offsetX: _this.prevPos.x, offsetY: _this.prevPos.y });
     },
     delKeyAction: function () {
         var _this = this;
@@ -1276,7 +1252,7 @@ whiteboard = {
             var left = Math.round(p.left * 100) / 100;
             var top = Math.round(p.top * 100) / 100;
             _this.drawId++;
-            _this.sendFunction({t: "eraseRec", d: [left, top, width, height]});
+            _this.sendFunction({ t: "eraseRec", d: [left, top, width, height] });
             _this.eraseRec(left, top, width, height);
         });
         _this.mouseOverlay.find(".xCanvasBtn").click(); //Remove all current drops
@@ -1329,7 +1305,15 @@ whiteboard = {
         }
         _this.penSmoothLastCoordsArrow.push(X, Y);
         if (_this.penSmoothLastCoordsArrow.length >= 8) {
-            _this.drawPenSmoothLineArrow(_this.penSmoothLastCoordsArrow, _this.drawcolor, _this.thickness, 5, 5, true, false);
+            _this.drawPenSmoothLineArrow(
+                _this.penSmoothLastCoordsArrow,
+                _this.drawcolor,
+                _this.thickness,
+                5,
+                5,
+                true,
+                false
+            );
             _this.sendFunction({
                 t: _this.tool,
                 d: _this.penSmoothLastCoordsArrow,
@@ -1352,7 +1336,15 @@ whiteboard = {
         }
         _this.penSmoothLastCoordsTab.push(X, Y);
         if (_this.penSmoothLastCoordsTab.length >= 8) {
-            _this.drawPenSmoothLineTab(_this.penSmoothLastCoordsTab, _this.drawcolor, _this.thickness, 5, 5, true, false);
+            _this.drawPenSmoothLineTab(
+                _this.penSmoothLastCoordsTab,
+                _this.drawcolor,
+                _this.thickness,
+                5,
+                5,
+                true,
+                false
+            );
             _this.sendFunction({
                 t: _this.tool,
                 d: _this.penSmoothLastCoordsTab,
@@ -1375,7 +1367,11 @@ whiteboard = {
         }
         _this.penSmoothLastCoordsDotted.push(X, Y);
         if (_this.penSmoothLastCoordsDotted.length >= 8) {
-            _this.drawPenSmoothLineDotted(_this.penSmoothLastCoordsDotted, _this.drawcolor, _this.thickness);
+            _this.drawPenSmoothLineDotted(
+                _this.penSmoothLastCoordsDotted,
+                _this.drawcolor,
+                _this.thickness
+            );
             _this.sendFunction({
                 t: _this.tool,
                 d: _this.penSmoothLastCoordsDotted,
@@ -1398,7 +1394,11 @@ whiteboard = {
         }
         _this.penSmoothLastCoordsDottedArrow.push(X, Y);
         if (_this.penSmoothLastCoordsDottedArrow.length >= 8) {
-            _this.drawPenSmoothLineDottedArrow(_this.penSmoothLastCoordsDottedArrow, _this.drawcolor, _this.thickness);
+            _this.drawPenSmoothLineDottedArrow(
+                _this.penSmoothLastCoordsDottedArrow,
+                _this.drawcolor,
+                _this.thickness
+            );
             _this.sendFunction({
                 t: _this.tool,
                 d: _this.penSmoothLastCoordsDottedArrow,
@@ -1421,7 +1421,11 @@ whiteboard = {
         }
         _this.penSmoothLastCoordsDottedCircle.push(X, Y);
         if (_this.penSmoothLastCoordsDottedCircle.length >= 8) {
-            _this.drawPenSmoothLineDottedCircle(_this.penSmoothLastCoordsDottedCircle, _this.drawcolor, _this.thickness);
+            _this.drawPenSmoothLineDottedCircle(
+                _this.penSmoothLastCoordsDottedCircle,
+                _this.drawcolor,
+                _this.thickness
+            );
             _this.sendFunction({
                 t: _this.tool,
                 d: _this.penSmoothLastCoordsDottedCircle,
@@ -1444,7 +1448,11 @@ whiteboard = {
         }
         _this.penSmoothLastCoordsCircle.push(X, Y);
         if (_this.penSmoothLastCoordsCircle.length >= 8) {
-            _this.drawPenSmoothLineCircle(_this.penSmoothLastCoordsCircle, _this.drawcolor, _this.thickness);
+            _this.drawPenSmoothLineCircle(
+                _this.penSmoothLastCoordsCircle,
+                _this.drawcolor,
+                _this.thickness
+            );
             _this.sendFunction({
                 t: _this.tool,
                 d: _this.penSmoothLastCoordsCircle,
@@ -1508,9 +1516,21 @@ whiteboard = {
         ctx.fill();
         ctx.restore();
     },
-    drawDottedArrow: function (fromX, fromY, toX, toY, color, thickness, Width, Length, aWidth, aLength, arrowStart, arrowEnd) {
+    drawDottedArrow: function (
+        fromX,
+        fromY,
+        toX,
+        toY,
+        color,
+        thickness,
+        Width,
+        Length,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
-
 
         _this.ctx.strokeStyle = color;
         _this.ctx.fillStyle = color;
@@ -1526,18 +1546,16 @@ whiteboard = {
         // draw the starting arrowhead
         if (arrowStart) {
             var startRadians = Math.atan((toY - fromY) / (toX - fromX));
-            startRadians += ((toX > fromX) ? -90 : 90) * Math.PI / 180;
+            startRadians += ((toX > fromX ? -90 : 90) * Math.PI) / 180;
             this.drawArrowhead(_this.ctx, fromX, fromY, startRadians);
             // draw the ending arrowhead
         }
         if (arrowEnd) {
             var endRadians = Math.atan((toY - fromY) / (this.x2 - this.x1));
-            endRadians += ((toX > fromX) ? 90 : -90) * Math.PI / 180;
+            endRadians += ((toX > fromX ? 90 : -90) * Math.PI) / 180;
             this.drawArrowhead(_this.ctx, toX, toY, endRadians);
-
         }
         _this.ctx.setLineDash([0, 0]);
-
 
         //_this.ctx.beginPath();
         //_this.ctx.setLineDash([Width, Length]);
@@ -1572,11 +1590,20 @@ whiteboard = {
         //_this.ctx.closePath();
 
         //_this.ctx.setLineDash([0, 0]);
-
-
     },
 
-    drawArrow: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawArrow: function (
+        fromX,
+        fromY,
+        toX,
+        toY,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         _this.ctx.beginPath();
         _this.ctx.moveTo(fromX, fromY);
@@ -1609,10 +1636,19 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         _this.ctx.closePath();
-
-
     },
-    drawTab: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawTab: function (
+        fromX,
+        fromY,
+        toX,
+        toY,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         _this.ctx.beginPath();
         _this.ctx.moveTo(fromX, fromY);
@@ -1646,14 +1682,22 @@ whiteboard = {
             _this.ctx.lineTo(length - aLength, aWidth);
         }
 
-
         _this.ctx.stroke();
         _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         _this.ctx.closePath();
-
-
     },
-    drawArrowTab: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawArrowTab: function (
+        fromX,
+        fromY,
+        toX,
+        toY,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         _this.ctx.beginPath();
         _this.ctx.moveTo(fromX, fromY);
@@ -1663,7 +1707,6 @@ whiteboard = {
         _this.ctx.lineCap = _this.lineCap;
         _this.ctx.stroke();
         _this.ctx.closePath();
-
 
         var dx = toX - fromX;
         var dy = toY - fromY;
@@ -1687,10 +1730,19 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         _this.ctx.closePath();
-
-
     },
-    drawArrowDootedTab: function (fromX, fromY, toX, toY, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawArrowDootedTab: function (
+        fromX,
+        fromY,
+        toX,
+        toY,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         _this.ctx.beginPath();
         _this.ctx.setLineDash([5, 5]);
@@ -1702,7 +1754,6 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.closePath();
 
-
         var dx = toX - fromX;
         var dy = toY - fromY;
         var angle = Math.atan2(dy, dx);
@@ -1731,8 +1782,6 @@ whiteboard = {
 
         _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         _this.ctx.closePath();
-
-
     },
     drawPenSmoothLine: function (coords, color, thickness) {
         var _this = this;
@@ -1761,7 +1810,15 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.closePath();
     },
-    drawPenSmoothLineArrow: function (coords, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawPenSmoothLineArrow: function (
+        coords,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         var xm1 = coords[0];
         var ym1 = coords[1];
@@ -1791,7 +1848,15 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.closePath();
     },
-    drawPenSmoothLineTab: function (coords, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawPenSmoothLineTab: function (
+        coords,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         var xm1 = coords[0];
         var ym1 = coords[1];
@@ -1850,7 +1915,15 @@ whiteboard = {
         _this.ctx.closePath();
         _this.ctx.setLineDash([0, 0]);
     },
-    drawPenSmoothLineDottedArrow: function (coords, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawPenSmoothLineDottedArrow: function (
+        coords,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         _this.ctx.setLineDash([_this.thickness, _this.thickness]);
         var xm1 = coords[0];
@@ -1880,7 +1953,6 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.closePath();
         _this.ctx.setLineDash([0, 0]);
-
 
         var dx = toX - fromX;
         var dy = toY - fromY;
@@ -1904,10 +1976,16 @@ whiteboard = {
         _this.ctx.stroke();
         _this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         _this.ctx.closePath();
-
-
     },
-    drawPenSmoothLineDottedCircle: function (coords, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawPenSmoothLineDottedCircle: function (
+        coords,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         _this.ctx.setLineDash([_this.thickness, _this.thickness]);
         var xm1 = coords[0];
@@ -1938,7 +2016,6 @@ whiteboard = {
         _this.ctx.closePath();
         _this.ctx.setLineDash([0, 0]);
 
-
         //var _this = this;
         //_this.ctx.beginPath();
         //_this.ctx.arc(this.DottedfirstX, this.DottedfirstY, 5 * thickness, 0, 2 * Math.PI, false);
@@ -1946,7 +2023,6 @@ whiteboard = {
         //_this.ctx.strokeStyle = color;
         //_this.ctx.fillStyle = color;
         //_this.ctx.stroke();
-
 
         //var dx = toX - fromX;
         //var dy = toY - fromY;
@@ -1970,10 +2046,16 @@ whiteboard = {
         //_this.ctx.stroke();
         //_this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         //_this.ctx.closePath();
-
-
     },
-    drawPenSmoothLineCircle: function (coords, color, thickness, aWidth, aLength, arrowStart, arrowEnd) {
+    drawPenSmoothLineCircle: function (
+        coords,
+        color,
+        thickness,
+        aWidth,
+        aLength,
+        arrowStart,
+        arrowEnd
+    ) {
         var _this = this;
         var xm1 = coords[0];
         var ym1 = coords[1];
@@ -2003,7 +2085,6 @@ whiteboard = {
         _this.ctx.closePath();
         _this.ctx.setLineDash([0, 0]);
 
-
         //var _this = this;
         //_this.ctx.beginPath();
         //_this.ctx.arc(this.DottedfirstX, this.DottedfirstY, 5 * thickness, 0, 2 * Math.PI, false);
@@ -2011,7 +2092,6 @@ whiteboard = {
         //_this.ctx.strokeStyle = color;
         //_this.ctx.fillStyle = color;
         //_this.ctx.stroke();
-
 
         //var dx = toX - fromX;
         //var dy = toY - fromY;
@@ -2035,8 +2115,6 @@ whiteboard = {
         //_this.ctx.stroke();
         //_this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         //_this.ctx.closePath();
-
-
     },
     drawEraserLine: function (fromX, fromY, toX, toY, thickness) {
         var _this = this;
@@ -2096,7 +2174,6 @@ whiteboard = {
         var _this = this;
         var rd = radius * thickness;
         if (rd <= 0) {
-
             rd = 1;
         }
         _this.ctx.beginPath();
@@ -2113,7 +2190,7 @@ whiteboard = {
         _this.canvas.height = _this.canvas.height;
         _this.imgContainer.empty();
         _this.textContainer.empty();
-        _this.sendFunction({t: "clear"});
+        _this.sendFunction({ t: "clear" });
         _this.drawBuffer = [];
         _this.undoBuffer = [];
         _this.drawId = 0;
@@ -2122,7 +2199,17 @@ whiteboard = {
         var _this = this;
         _this.thickness = thickness;
 
-        if ((_this.tool == "text" || this.tool === "stickynote" || this.tool === "soccerPlayer" || this.tool === "circleWithCross" || this.tool === "Cross" || this.tool === "CenterCross" || this.tool === "RightCross" || this.tool === "leftCross") && _this.latestActiveTextBoxId) {
+        if (
+            (_this.tool == "text" ||
+                this.tool === "stickynote" ||
+                this.tool === "soccerPlayer" ||
+                this.tool === "circleWithCross" ||
+                this.tool === "Cross" ||
+                this.tool === "CenterCross" ||
+                this.tool === "RightCross" ||
+                this.tool === "leftCross") &&
+            _this.latestActiveTextBoxId
+        ) {
             _this.sendFunction({
                 t: "setTextboxFontSize",
                 d: [_this.latestActiveTextBoxId, thickness],
@@ -2142,28 +2229,28 @@ whiteboard = {
         var _this = this;
         var oldTool = _this.tool;
 
-        const {imageURL} = ConfigService;
+        const { imageURL } = ConfigService;
         var finalURL = url;
         if (imageURL && url.startsWith("/uploads/")) {
             finalURL = imageURL + url;
         }
 
-        var img = this.imgWithSrc(finalURL).css({width: "100%", height: "100%"});
+        var img = this.imgWithSrc(finalURL).css({ width: "100%", height: "100%" });
         finalURL = img.attr("src");
 
         _this.setTool("mouse"); //Set to mouse tool while dropping to prevent errors
         _this.imgDragActive = true;
-        _this.mouseOverlay.css({cursor: "default"});
+        _this.mouseOverlay.css({ cursor: "default" });
         var imgDiv = $(
             '<div class="dragMe" style="border: 2px dashed gray; position:absolute; left:200px; top:200px; min-width:160px; min-height:100px; cursor:move;">' +
-            '<div style="position:absolute; right:5px; top:3px;">' +
-            '<button draw="1" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToCanvasBtn btn btn-default">Draw to canvas</button> ' +
-            '<button draw="0" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToBackgroundBtn btn btn-default">Add to background</button> ' +
-            '<button style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="xCanvasBtn btn btn-default">x</button>' +
-            "</div>" +
-            '<i style="position:absolute; bottom: -4px; right: 2px; font-size: 2em; color: gray; transform: rotate(-45deg);" class="fas fa-sort-down" aria-hidden="true"></i>' +
-            '<div class="rotationHandle" style="position:absolute; bottom: -30px; left: 0px; width:100%; text-align:center; cursor:ew-resize;"><i class="fa fa-undo"></i></div>' +
-            "</div>"
+                '<div style="position:absolute; right:5px; top:3px;">' +
+                '<button draw="1" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToCanvasBtn btn btn-default">Draw to canvas</button> ' +
+                '<button draw="0" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToBackgroundBtn btn btn-default">Add to background</button> ' +
+                '<button style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="xCanvasBtn btn btn-default">x</button>' +
+                "</div>" +
+                '<i style="position:absolute; bottom: -4px; right: 2px; font-size: 2em; color: gray; transform: rotate(-45deg);" class="fas fa-sort-down" aria-hidden="true"></i>' +
+                '<div class="rotationHandle" style="position:absolute; bottom: -30px; left: 0px; width:100%; text-align:center; cursor:ew-resize;"><i class="fa fa-undo"></i></div>' +
+                "</div>"
         );
         imgDiv.prepend(img);
         imgDiv
@@ -2232,8 +2319,7 @@ whiteboard = {
         imgDiv.resizable();
         var params = {
             // Callback fired on rotation start.
-            start: function (event, ui) {
-            },
+            start: function (event, ui) {},
             // Callback fired during rotation.
             rotate: function (event, ui) {
                 //console.log(ui)
@@ -2250,32 +2336,32 @@ whiteboard = {
         dom.i2svg();
     },
 
-    'addImgToCanvasByUrl': function (url) {
+    addImgToCanvasByUrl: function (url) {
         var _this = this;
         var oldTool = _this.tool;
 
-        const {imageURL} = ConfigService;
+        const { imageURL } = ConfigService;
         var finalURL = url;
         if (imageURL && url.startsWith("../../")) {
             finalURL = imageURL + url;
         }
 
-        var img = this.imgWithSrc(finalURL).css({width: "100%", height: "100%"});
+        var img = this.imgWithSrc(finalURL).css({ width: "100%", height: "100%" });
         finalURL = img.attr("src");
 
         _this.setTool("mouse"); //Set to mouse tool while dropping to prevent errors
         _this.imgDragActive = true;
-        _this.mouseOverlay.css({cursor: "default"});
+        _this.mouseOverlay.css({ cursor: "default" });
         var imgDiv = $(
             '<div class="dragMe" style="border: 2px dashed gray; position:absolute; left:200px; top:200px; min-width:160px; min-height:100px; cursor:move;">' +
-            '<div style="position:absolute; right:5px; top:3px;">' +
-            '<button draw="1" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToCanvasBtn btn btn-default">Draw to canvas</button> ' +
-            '<button draw="0" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToBackgroundBtn btn btn-default">Add to background</button> ' +
-            '<button style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="xCanvasBtn btn btn-default">x</button>' +
-            "</div>" +
-            '<i style="position:absolute; bottom: -4px; right: 2px; font-size: 2em; color: gray; transform: rotate(-45deg);" class="fas fa-sort-down" aria-hidden="true"></i>' +
-            '<div class="rotationHandle" style="position:absolute; bottom: -30px; left: 0px; width:100%; text-align:center; cursor:ew-resize;"><i class="fa fa-undo"></i></div>' +
-            "</div>"
+                '<div style="position:absolute; right:5px; top:3px;">' +
+                '<button draw="1" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToCanvasBtn btn btn-default">Draw to canvas</button> ' +
+                '<button draw="0" style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="addToBackgroundBtn btn btn-default">Add to background</button> ' +
+                '<button style="margin: 0px 0px; background: #03a9f4; padding: 5px; margin-top: 3px; color: white;" class="xCanvasBtn btn btn-default">x</button>' +
+                "</div>" +
+                '<i style="position:absolute; bottom: -4px; right: 2px; font-size: 2em; color: gray; transform: rotate(-45deg);" class="fas fa-sort-down" aria-hidden="true"></i>' +
+                '<div class="rotationHandle" style="position:absolute; bottom: -30px; left: 0px; width:100%; text-align:center; cursor:ew-resize;"><i class="fa fa-undo"></i></div>' +
+                "</div>"
         );
         imgDiv.prepend(img);
         imgDiv
@@ -2344,8 +2430,7 @@ whiteboard = {
         imgDiv.resizable();
         var params = {
             // Callback fired on rotation start.
-            start: function (event, ui) {
-            },
+            start: function (event, ui) {},
             // Callback fired during rotation.
             rotate: function (event, ui) {
                 //console.log(ui)
@@ -2393,185 +2478,210 @@ whiteboard = {
             cssclass += " stickyNote";
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class="' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                "background-color:" +
-                textboxBackgroundColor +
-                ';">' +
-                '<div contentEditable="true" spellcheck="false" class="textContent" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px"></div>' +
-                '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-                "</div>"
+                    txId +
+                    '" class="' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    "background-color:" +
+                    textboxBackgroundColor +
+                    ';">' +
+                    '<div contentEditable="true" spellcheck="false" class="textContent" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px"></div>' +
+                    '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "text") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class=" ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="true" spellcheck="false" class="textContent" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px"></div>' +
-                '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon " style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class=" ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="true" spellcheck="false" class="textContent" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px"></div>' +
+                    '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon " style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "soccerPlayer") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class=" ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px">' +
-                '<img src="./images/player.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 50 + '">' +
-                '</div > ' +
-                '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon " style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class=" ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px">' +
+                    '<img src="./images/player.png" alt="Girl in a jacket" width="' +
+                    fontsize * 50 +
+                    '" height="' +
+                    fontsize * 50 +
+                    '">' +
+                    "</div > " +
+                    '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon " style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "circleWithCross") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class="hotqcontent ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px">' +
-                '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="' + fontsize * 50 + '" height="' + fontsize * 50 + '"	 viewBox = "0 0 330 330" style = "fill:' + textcolor + ';color:' + textcolor + '; enable-background:new 0 0 330 330;" xml: space = "preserve" ><g>	<path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165c90.982,0,165-74.019,165-165S255.982,0,165,0z M165,300		c-74.439,0-135-60.561-135-135S90.561,30,165,30c74.439,0,135,60.561,135,135S239.439,300,165,300z"/>	<path d="M239.247,90.754c-5.857-5.858-15.355-5.858-21.213,0l-53.033,53.033l-53.033-53.033c-5.857-5.858-15.355-5.858-21.213,0		c-5.858,5.858-5.858,15.355,0,21.213L143.788,165l-53.033,53.033c-5.858,5.858-5.858,15.355,0,21.213		c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.606-4.394l53.033-53.033l53.033,53.033		c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L186.214,165		l53.033-53.033C245.105,106.109,245.105,96.612,239.247,90.754z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg >' +
-                '</div > ' +
-                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class="hotqcontent ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px">' +
+                    '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="' +
+                    fontsize * 50 +
+                    '" height="' +
+                    fontsize * 50 +
+                    '"	 viewBox = "0 0 330 330" style = "fill:' +
+                    textcolor +
+                    ";color:" +
+                    textcolor +
+                    '; enable-background:new 0 0 330 330;" xml: space = "preserve" ><g>	<path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165c90.982,0,165-74.019,165-165S255.982,0,165,0z M165,300		c-74.439,0-135-60.561-135-135S90.561,30,165,30c74.439,0,135,60.561,135,135S239.439,300,165,300z"/>	<path d="M239.247,90.754c-5.857-5.858-15.355-5.858-21.213,0l-53.033,53.033l-53.033-53.033c-5.857-5.858-15.355-5.858-21.213,0		c-5.858,5.858-5.858,15.355,0,21.213L143.788,165l-53.033,53.033c-5.858,5.858-5.858,15.355,0,21.213		c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.606-4.394l53.033-53.033l53.033,53.033		c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L186.214,165		l53.033-53.033C245.105,106.109,245.105,96.612,239.247,90.754z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg >' +
+                    "</div > " +
+                    '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "Cross") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class="hotqcontent ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px">' +
-                '<svg style = "fill:' + textcolor + ';color:' + textcolor + ';"  width="' + fontsize * 50 + '" height="' + fontsize * 50 + '" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="cancel"><path  d="M28,29a1,1,0,0,1-.71-.29l-24-24A1,1,0,0,1,4.71,3.29l24,24a1,1,0,0,1,0,1.42A1,1,0,0,1,28,29Z"/><path class="cls-1" d="M4,29a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42l24-24a1,1,0,1,1,1.42,1.42l-24,24A1,1,0,0,1,4,29Z"/></g></svg>' +
-                '</div > ' +
-                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class="hotqcontent ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px">' +
+                    '<svg style = "fill:' +
+                    textcolor +
+                    ";color:" +
+                    textcolor +
+                    ';"  width="' +
+                    fontsize * 50 +
+                    '" height="' +
+                    fontsize * 50 +
+                    '" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="cancel"><path  d="M28,29a1,1,0,0,1-.71-.29l-24-24A1,1,0,0,1,4.71,3.29l24,24a1,1,0,0,1,0,1.42A1,1,0,0,1,28,29Z"/><path class="cls-1" d="M4,29a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42l24-24a1,1,0,1,1,1.42,1.42l-24,24A1,1,0,0,1,4,29Z"/></g></svg>' +
+                    "</div > " +
+                    '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "CenterCross") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class="hotqcontent ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px"><img src="./images/CenterCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
-                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class="hotqcontent ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px"><img src="./images/CenterCross.png" alt="Girl in a jacket" width="' +
+                    fontsize * 50 +
+                    '" height="' +
+                    fontsize * 25 +
+                    '"></div>' +
+                    '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "leftCross") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class="hotqcontent ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px"><img src="./images/leftCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
-                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class="hotqcontent ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px"><img src="./images/leftCross.png" alt="Girl in a jacket" width="' +
+                    fontsize * 50 +
+                    '" height="' +
+                    fontsize * 25 +
+                    '"></div>' +
+                    '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         } else if (isStickyNote == "RightCross") {
             textBox = $(
                 '<div id="' +
-                txId +
-                '" class="hotqcontent ' +
-                cssclass +
-                '" style="font-family: Monospace; position:absolute; top:' +
-                top +
-                "px; left:" +
-                left +
-                "px;" +
-                ';">' +
-                '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
-                fontsize +
-                "em; color:" +
-                textcolor +
-                '; min-width:50px; min-height:50px"><img src="./images/RightCross.png" alt="Girl in a jacket" width="' + fontsize * 50 + '" height="' + fontsize * 25 + '"></div>' +
-                '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
-                '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
-
-                "</div>"
+                    txId +
+                    '" class="hotqcontent ' +
+                    cssclass +
+                    '" style="font-family: Monospace; position:absolute; top:' +
+                    top +
+                    "px; left:" +
+                    left +
+                    "px;" +
+                    ';">' +
+                    '<div contentEditable="false" spellcheck="false" class="" style="outline: none; font-size:' +
+                    fontsize +
+                    "em; color:" +
+                    textcolor +
+                    '; min-width:50px; min-height:50px"><img src="./images/RightCross.png" alt="Girl in a jacket" width="' +
+                    fontsize * 50 +
+                    '" height="' +
+                    fontsize * 25 +
+                    '"></div>' +
+                    '<div title="remove textbox" class="removeIcon nested" style="position:absolute;  cursor:pointer; top:-4px; right:2px;">x</div>' +
+                    '<div title="move textbox" class="moveIcon nested" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
+                    "</div>"
             );
         }
         _this.latestActiveTextBoxId = txId;
@@ -2624,14 +2734,14 @@ whiteboard = {
         });
         textBox.find(".textContent").on("input", function () {
             var text = btoa(unescape(encodeURIComponent($(this).html()))); //Get html and make encode base64 also take care of the charset
-            _this.sendFunction({t: "setTextboxText", d: [txId, text]});
+            _this.sendFunction({ t: "setTextboxText", d: [txId, text] });
         });
         textBox
             .find(".removeIcon")
             .off("click")
             .click(function (e) {
                 $("#" + txId).remove();
-                _this.sendFunction({t: "removeTextbox", d: [txId]});
+                _this.sendFunction({ t: "removeTextbox", d: [txId] });
                 e.preventDefault();
                 return false;
             });
@@ -2641,7 +2751,16 @@ whiteboard = {
                 textBox.find(".textContent").focus();
             }, 0);
         }
-        if (this.tool === "text" || this.tool === "stickynote" || this.tool === "soccerPlayer" || this.tool === "circleWithCross" || this.tool === "Cross" || this.tool === "CenterCross" || this.tool === "RightCross" || this.tool === "leftCross") {
+        if (
+            this.tool === "text" ||
+            this.tool === "stickynote" ||
+            this.tool === "soccerPlayer" ||
+            this.tool === "circleWithCross" ||
+            this.tool === "Cross" ||
+            this.tool === "CenterCross" ||
+            this.tool === "RightCross" ||
+            this.tool === "leftCross"
+        ) {
             textBox.addClass("active");
         }
 
@@ -2657,22 +2776,22 @@ whiteboard = {
         $("#" + txId).remove();
     },
     setTextboxPosition(txId, top, left) {
-        $("#" + txId).css({top: top + "px", left: left + "px"});
+        $("#" + txId).css({ top: top + "px", left: left + "px" });
     },
     setTextboxFontSize(txId, fontSize) {
         $("#" + txId)
             .find(".textContent")
-            .css({"font-size": fontSize + "em"});
+            .css({ "font-size": fontSize + "em" });
     },
     setTextboxFontColor(txId, color) {
         $("#" + txId)
             .find(".textContent")
-            .css({color: color});
+            .css({ color: color });
     },
     setTextboxBackgroundColor(txId, textboxBackgroundColor) {
         $("#" + txId)
             .find(".textContent")
-            .css({"background-color": textboxBackgroundColor});
+            .css({ "background-color": textboxBackgroundColor });
     },
     drawImgToCanvas(url, width, height, left, top, rotationAngle, doneCallback) {
         top = Number(top); // probably not as important here
@@ -2760,17 +2879,26 @@ whiteboard = {
     },
     undoWhiteboardClick: function () {
         if (ReadOnlyService.readOnlyActive) return;
-        this.sendFunction({t: "undo"});
+        this.sendFunction({ t: "undo" });
         this.undoWhiteboard();
     },
     redoWhiteboardClick: function () {
         if (ReadOnlyService.readOnlyActive) return;
-        this.sendFunction({t: "redo"});
+        this.sendFunction({ t: "redo" });
         this.redoWhiteboard();
     },
     setTool: function (tool) {
         this.tool = tool;
-        if (this.tool === "text" || this.tool === "stickynote" || this.tool === "soccerPlayer" || this.tool === "circleWithCross" || this.tool === "Cross" || this.tool === "CenterCross" || this.tool === "RightCross" || this.tool === "leftCross") {
+        if (
+            this.tool === "text" ||
+            this.tool === "stickynote" ||
+            this.tool === "soccerPlayer" ||
+            this.tool === "circleWithCross" ||
+            this.tool === "Cross" ||
+            this.tool === "CenterCross" ||
+            this.tool === "RightCross" ||
+            this.tool === "leftCross"
+        ) {
             $(".textBox").addClass("active");
             this.textContainer.appendTo($(whiteboardContainer)); //Bring textContainer to the front
         } else {
@@ -2784,8 +2912,18 @@ whiteboard = {
     setDrawColor(color) {
         var _this = this;
         _this.drawcolor = color;
-        $("#whiteboardColorpicker").css({background: color});
-        if ((_this.tool == "text" || this.tool === "stickynote" || this.tool === "soccerPlayer" || this.tool === "circleWithCross" || this.tool === "Cross" || this.tool === "CenterCross" || this.tool === "RightCross" || this.tool === "leftCross") && _this.latestActiveTextBoxId) {
+        $("#whiteboardColorpicker").css({ background: color });
+        if (
+            (_this.tool == "text" ||
+                this.tool === "stickynote" ||
+                this.tool === "soccerPlayer" ||
+                this.tool === "circleWithCross" ||
+                this.tool === "Cross" ||
+                this.tool === "CenterCross" ||
+                this.tool === "RightCross" ||
+                this.tool === "leftCross") &&
+            _this.latestActiveTextBoxId
+        ) {
             _this.sendFunction({
                 t: "setTextboxFontColor",
                 d: [_this.latestActiveTextBoxId, color],
@@ -2796,8 +2934,18 @@ whiteboard = {
     setTextBackgroundColor(textboxBackgroundColor) {
         var _this = this;
         _this.textboxBackgroundColor = textboxBackgroundColor;
-        $("#textboxBackgroundColorPicker").css({background: textboxBackgroundColor});
-        if ((_this.tool == "text" || this.tool === "stickynote" || this.tool === "soccerPlayer" || this.tool === "circleWithCross" || this.tool === "Cross" || this.tool === "CenterCross" || this.tool === "RightCross" || this.tool === "leftCross") && _this.latestActiveTextBoxId) {
+        $("#textboxBackgroundColorPicker").css({ background: textboxBackgroundColor });
+        if (
+            (_this.tool == "text" ||
+                this.tool === "stickynote" ||
+                this.tool === "soccerPlayer" ||
+                this.tool === "circleWithCross" ||
+                this.tool === "Cross" ||
+                this.tool === "CenterCross" ||
+                this.tool === "RightCross" ||
+                this.tool === "leftCross") &&
+            _this.latestActiveTextBoxId
+        ) {
             _this.sendFunction({
                 t: "setTextboxBackgroundColor",
                 d: [_this.latestActiveTextBoxId, textboxBackgroundColor],
@@ -2806,23 +2954,23 @@ whiteboard = {
         }
     },
     updateSmallestScreenResolution() {
-        const {smallestScreenResolution} = InfoService;
-        const {showSmallestScreenIndicator} = ConfigService;
+        const { smallestScreenResolution } = InfoService;
+        const { showSmallestScreenIndicator } = ConfigService;
         if (showSmallestScreenIndicator && smallestScreenResolution) {
-            const {w: width, h: height} = smallestScreenResolution;
+            const { w: width, h: height } = smallestScreenResolution;
             this.backgroundGrid.empty();
             if (width < $(window).width() || height < $(window).height()) {
                 this.backgroundGrid.append(
                     '<div style="position:absolute; left:0px; top:0px; border-right:3px dotted black; border-bottom:3px dotted black; width:' +
-                    width +
-                    "px; height:" +
-                    height +
-                    'px;"></div>'
+                        width +
+                        "px; height:" +
+                        height +
+                        'px;"></div>'
                 );
                 this.backgroundGrid.append(
                     '<div style="position:absolute; left:' +
-                    (width + 5) +
-                    'px; top:0px;">smallest screen participating</div>'
+                        (width + 5) +
+                        'px; top:0px;">smallest screen participating</div>'
                 );
             }
         }
@@ -2856,15 +3004,70 @@ whiteboard = {
             } else if (tool === "penCircle") {
                 _this.drawPenSmoothLineCircle(data, color, thickness);
             } else if (tool === "dotted") {
-                _this.drawDotted(data[0], data[1], data[2], data[3], color, thickness, thickness * 2, thickness * 2);
+                _this.drawDotted(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    color,
+                    thickness,
+                    thickness * 2,
+                    thickness * 2
+                );
             } else if (tool === "dottedArrow") {
-                _this.drawDottedArrow(data[0], data[1], data[2], data[3], color, thickness, thickness * 2, thickness * 2, 5, 5, true, false);
+                _this.drawDottedArrow(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    color,
+                    thickness,
+                    thickness * 2,
+                    thickness * 2,
+                    5,
+                    5,
+                    true,
+                    false
+                );
             } else if (tool === "arrow") {
-                _this.drawArrow(data[0], data[1], data[2], data[3], color, thickness, 5, 5, true, false);
+                _this.drawArrow(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    color,
+                    thickness,
+                    5,
+                    5,
+                    true,
+                    false
+                );
             } else if (tool === "arrowTab") {
-                _this.drawArrowTab(data[0], data[1], data[2], data[3], color, thickness, 5, 5, true, false);
+                _this.drawArrowTab(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    color,
+                    thickness,
+                    5,
+                    5,
+                    true,
+                    false
+                );
             } else if (tool === "arrowDootedTab") {
-                _this.drawArrowDootedTab(data[0], data[1], data[2], data[3], color, thickness, 5, 5, true, false);
+                _this.drawArrowDootedTab(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    color,
+                    thickness,
+                    5,
+                    5,
+                    true,
+                    false
+                );
             } else if (tool === "rect") {
                 _this.drawRec(data[0], data[1], data[2], data[3], color, thickness);
             } else if (tool === "circle") {
@@ -2901,7 +3104,16 @@ whiteboard = {
                     );
                 }
             } else if (tool === "addTextBox") {
-                _this.addTextBox(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
+                _this.addTextBox(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    data[4],
+                    data[5],
+                    data[6],
+                    data[7]
+                );
             } else if (tool === "setTextboxText") {
                 _this.setTextboxText(data[0], data[1]);
             } else if (tool === "removeTextbox") {
@@ -2926,19 +3138,19 @@ whiteboard = {
                     if (_this.cursorContainer.find("." + content["username"]).length >= 1) {
                         _this.cursorContainer
                             .find("." + content["username"])
-                            .css({left: data[0] + "px", top: data[1] - 15 + "px"});
+                            .css({ left: data[0] + "px", top: data[1] - 15 + "px" });
                     } else {
                         _this.cursorContainer.append(
                             '<div style="font-size:0.8em; padding-left:2px; padding-right:2px; background:gray; color:white; border-radius:3px; position:absolute; left:' +
-                            data[0] +
-                            "px; top:" +
-                            (data[1] - 151) +
-                            'px;" class="userbadge ' +
-                            content["username"] +
-                            '">' +
-                            '<div style="width:4px; height:4px; background:gray; position:absolute; top:13px; left:-2px; border-radius:50%;"></div>' +
-                            decodeURIComponent(atob(content["username"])) +
-                            "</div>"
+                                data[0] +
+                                "px; top:" +
+                                (data[1] - 151) +
+                                'px;" class="userbadge ' +
+                                content["username"] +
+                                '">' +
+                                '<div style="width:4px; height:4px; background:gray; position:absolute; top:13px; left:-2px; border-radius:50%;"></div>' +
+                                decodeURIComponent(atob(content["username"])) +
+                                "</div>"
                         );
                     }
                 } else {
@@ -3055,7 +3267,6 @@ whiteboard = {
                     backgroundColor: "rgba(0, 0, 0, 0)",
                     removeContainer: true,
                 }).then(function (canvas) {
-
                     destCtx.drawImage(canvas, left, top);
                     textBoxCnt--;
                     checkForReturn();
@@ -3068,7 +3279,6 @@ whiteboard = {
                     callback(url);
                 }
             }
-
             checkForReturn();
         };
     },
@@ -3110,7 +3320,6 @@ whiteboard = {
                 }
             }
         }
-
         lData(0);
     },
     loadJsonData(content, doneCallback) {
@@ -3175,13 +3384,22 @@ whiteboard = {
     refreshCursorAppearance() {
         //Set cursor depending on current active tool
         var _this = this;
-        if (_this.tool === "pen" || _this.tool === "eraser" || _this.tool === "penDotted" || _this.tool === "penArrow" || _this.tool === "penTab" || _this.tool === "penDottedArrow" || _this.tool === "penDottedCircle" || _this.tool === "penCircle") {
-            _this.mouseOverlay.css({cursor: "none"});
+        if (
+            _this.tool === "pen" ||
+            _this.tool === "eraser" ||
+            _this.tool === "penDotted" ||
+            _this.tool === "penArrow" ||
+            _this.tool === "penTab" ||
+            _this.tool === "penDottedArrow" ||
+            _this.tool === "penDottedCircle" ||
+            _this.tool === "penCircle"
+        ) {
+            _this.mouseOverlay.css({ cursor: "none" });
         } else if (_this.tool === "mouse") {
-            this.mouseOverlay.css({cursor: "default"});
+            this.mouseOverlay.css({ cursor: "default" });
         } else {
             //Line, Rec, Circle, Cutting
-            _this.mouseOverlay.css({cursor: "crosshair"});
+            _this.mouseOverlay.css({ cursor: "crosshair" });
         }
     },
 };
