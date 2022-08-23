@@ -1,4 +1,4 @@
-import keymage from "keymage";
+﻿import keymage from "keymage";
 import { io } from "socket.io-client";
 import whiteboard from "./whiteboard";
 import keybinds from "./keybinds";
@@ -606,7 +606,7 @@ function initWhiteboard() {
 
         window.addEventListener("message", (event) => {
             // IMPORTANT: check the origin of the data!
-            if (event.origin.startsWith("http://127.0.0.1:8000")) {
+            if (event.origin.startsWith("http://dev-clipboard.mhtechnologies.us")) {
                 try {
                     var j = event.data;
                     console.clear();
