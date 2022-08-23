@@ -155,7 +155,7 @@ function initWhiteboard() {
             //Load the whiteboard
             whiteboardId: whiteboardId,
             username: btoa(encodeURIComponent(myUsername)),
-            backgroundGridUrl: "./images/" + ConfigService.backgroundGridImage,
+            // backgroundGridUrl: "./images/" + ConfigService.backgroundGridImage,
             sendFunction: function (content) {
                 if (ReadOnlyService.readOnlyActive) return;
                 //ADD IN LATER THROUGH CONFIG
