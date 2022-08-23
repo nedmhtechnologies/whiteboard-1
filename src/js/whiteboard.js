@@ -68,7 +68,7 @@ const whiteboard = {
         whiteboardId: "0",
         username: "unknown",
         sendFunction: null,
-        // backgroundGridUrl: "./images/gb_grid.png",
+        backgroundGridUrl: "./images/gb_grid.png",
     },
     lastPointerSentTime: 0,
     /**
@@ -85,7 +85,7 @@ const whiteboard = {
 
         //background grid (repeating image) and smallest screen indication
         _this.backgroundGrid = $(
-            `<div style="position: absolute; left:0px; top:0; opacity: 0.2;  height: 100%; width: 100%;"></div>`
+            `<div style="position: absolute; left:0px; top:0; opacity: 0.2; height: 100%; width: 100%;"></div>`
         );
         // container for background images
         _this.imgContainer = $(
@@ -3219,8 +3219,8 @@ const whiteboard = {
         var imageFormat = options.imageFormat || "png";
         var drawBackgroundGrid = options.drawBackgroundGrid || false;
 
-        var brackGroundImg = new Image();
-        brackGroundImg.src = _this.settings.backgroundGridUrl;
+        // var brackGroundImg = new Image();
+        // brackGroundImg.src = _this.settings.backgroundGridUrl;
 
         brackGroundImg.onload = function () {
             var destCtx = copyCanvas.getContext("2d"); //Draw the maincanvas to the exportcanvas

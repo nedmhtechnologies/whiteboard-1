@@ -68,10 +68,10 @@ class ConfigService {
     /**
      * @type {string}
      */
-    #backgroundGridImage = "bg_grid.png";
-    get backgroundGridImage() {
-        return this.#backgroundGridImage;
-    }
+    // #backgroundGridImage = "bg_grid.png";
+    // get backgroundGridImage() {
+    //     return this.#backgroundGridImage;
+    // }
 
     /**
      * @type {{minDistDelta: number, minTimeDelta: number}}
@@ -103,7 +103,7 @@ class ConfigService {
             showSmallestScreenIndicator,
             imageDownloadFormat,
             drawBackgroundGrid,
-            backgroundGridImage,
+            // backgroundGridImage,
             performance,
         } = common;
 
@@ -111,7 +111,7 @@ class ConfigService {
         this.#showSmallestScreenIndicator = showSmallestScreenIndicator;
         this.#imageDownloadFormat = imageDownloadFormat;
         this.#drawBackgroundGrid = drawBackgroundGrid;
-        this.#backgroundGridImage = backgroundGridImage;
+        // this.#backgroundGridImage = backgroundGridImage;
         this.#refreshInfoInterval = 1000 / performance.refreshInfoFreq;
 
         const { whiteboardSpecific } = configFromServer;
